@@ -1,11 +1,18 @@
-import { Image, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import {styles} from "./styles";
 import ImageLogo from '../../assets/images/logo.jpeg'
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export function TopHeaderScreens(){
+
+    const insets = useSafeAreaInsets();
+
     return (
-        <View style={styles.container}>
-            <Image source={ImageLogo} style={{ width: 100, height: 100 }}/>
+        <View 
+            style={[styles.container, {paddingTop: insets.top}]}
+        >
+            <Text style={styles.title}>Conceição Digital</Text>
+            <Image source={ImageLogo} style={styles.image}/>
         </View>
     )
 }

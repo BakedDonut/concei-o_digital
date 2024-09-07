@@ -2,19 +2,51 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { GeneralScreen } from '../screens/HomeScreens/GeneralScreen';
 import { GroupsScreen } from '../screens/HomeScreens/GroupsScreen';
 import { AboutSreen } from '../screens/HomeScreens/AboutScreen';
+import { theme } from '../styles/theme';
+import ListIcon from '../assets/icons/list.svg';
+import { CreateEventScreen } from '../screens/AdminScreens/CreateEventScreen';
+import { Button, Text, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { ButtonOpenMainDrawer } from '../components/ButtonOpenMainDrawer';
 import { TopHeaderScreens } from '../components/TopHeaderScreens';
 
 const Tab = createMaterialTopTabNavigator();
 
 export function Home() {
   return (
-    <Tab.Navigator>
-        <TopHeaderScreens
-        
-        />
-      <Tab.Screen name="Geral" component={GeneralScreen} />
-      <Tab.Screen name="Grupos" component={GroupsScreen} />
-      <Tab.Screen name="Sobre" component={AboutSreen} />
-    </Tab.Navigator>
+    <>
+    <TopHeaderScreens/>
+    <View style={{flexDirection: 'row', width: '100%'}}>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: theme.colors.primary, 
+          tabBarInactiveTintColor: theme.colors.gray_yellow, 
+          tabBarIndicatorStyle: {
+            backgroundColor: theme.colors.primary,
+            height: 5, 
+            borderRadius: 50
+          },
+          tabBarStyle: {
+            backgroundColor: '#fff', 
+            elevation: 0, 
+            shadowOpacity: 0, 
+            width: '100%',
+          },
+          tabBarLabelStyle: {
+            fontFamily: theme.fonts.medium, 
+            fontSize: theme.sizes.medium, 
+          },
+        }}
+      >
+        <Tab.Screen name="Geral" component={GeneralScreen}/>
+        <Tab.Screen name="Grupos" component={GroupsScreen} />
+        <Tab.Screen name="Sobre" component={AboutSreen} />
+      </Tab.Navigator>
+      <ButtonOpenMainDrawer
+        width={'25%'}
+      />
+    </View>
+    </>
   );
 }
