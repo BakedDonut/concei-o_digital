@@ -11,8 +11,10 @@ export function TopHeaderScreens(){
         <View 
             style={[styles.container, {paddingTop: insets.top}]}
         >
-            <Text style={styles.title}>Conceição Digital</Text>
             <Image source={ImageLogo} style={styles.image}/>
+            <View style={styles.space}>
+                <Text style={styles.title}>Conceição Digital</Text>
+            </View>
         </View>
     )
 }

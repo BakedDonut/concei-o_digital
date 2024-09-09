@@ -19,5 +19,9 @@ export const styles = StyleSheet.create({
         fontFamily: theme.fonts.black,
         fontSize: theme.sizes.extra_large,
         color: theme.colors.primary,
+    },
+    space:{
+        width:'75%', 
+        alignItems: 'center'
     }
 })

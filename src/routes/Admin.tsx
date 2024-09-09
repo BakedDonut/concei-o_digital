@@ -13,6 +13,9 @@ export function Admin() {
     <>
     <TopHeaderScreens/>
     <View style={{flexDirection: 'row', width: '100%'}}>
+      <ButtonOpenMainDrawer
+          width={'37.5%'}
+      />
       <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: theme.colors.primary, 
@@ -43,9 +46,7 @@ export function Admin() {
           component={DeleteEventScreen} 
         />
       </Tab.Navigator>
-      <ButtonOpenMainDrawer
-          width={'37.5%'}
-      />
+      
     </View>
     </>
   );

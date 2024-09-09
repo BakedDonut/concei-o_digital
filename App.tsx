@@ -13,7 +13,7 @@ export default function App() {
     Roboto_500Medium
   });
 
-  if (!fontsLoaded && !fontError) {
+  if (!fontsLoaded) {
     return <LoadingScreen/>;
   }
 

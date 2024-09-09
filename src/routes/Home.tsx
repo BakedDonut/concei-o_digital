@@ -18,6 +18,9 @@ export function Home() {
     <>
     <TopHeaderScreens/>
     <View style={{flexDirection: 'row', width: '100%'}}>
+      <ButtonOpenMainDrawer
+        width={'25%'}
+      />
       <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: theme.colors.primary, 
@@ -43,9 +46,7 @@ export function Home() {
         <Tab.Screen name="Grupos" component={GroupsScreen} />
         <Tab.Screen name="Sobre" component={AboutSreen} />
       </Tab.Navigator>
-      <ButtonOpenMainDrawer
-        width={'25%'}
-      />
+      
     </View>
     </>
   );
