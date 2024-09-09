@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
     container:{
         flex: 1,
         paddingHorizontal: 16,
-        height: 3000
     },
     title:{
         fontFamily: theme.fonts.bold,

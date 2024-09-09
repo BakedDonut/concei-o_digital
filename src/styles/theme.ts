@@ -16,6 +16,8 @@ export const theme = {
     primary: '#A59067',
     primary_background: '#FEF6DC',
     gray_yellow: '#757575',
+    title: '#282828',
+    text: '#404040'
   },
   fonts:{
     regular: 'Roboto_400Regular',
