@@ -3,7 +3,7 @@ import { styles } from "./styles";
 import { EventsList } from "../../../components/EventsList";
 import { Event } from "../../../@types/event";
 import { FilterEvents } from "../../../components/FilterEvents";
-import { EventInfo } from "../../../components/EventInfo";
+
 import { useState } from "react";
 
 const events: Event[] = [
@@ -11,6 +11,7 @@ const events: Event[] = [
       id: '1',
       title: 'Workshop de React Native',
       subtitle: 'Aprenda a construir aplicativos móveis',
+      img: 'https://sujeitoprogramador.com/instareact/fotoPerfil1.png',
       description: 'Um workshop interativo sobre desenvolvimento com React Native. Ideal para desenvolvedores iniciantes e intermediários.',
       type_event_id: {
         id: '1',
@@ -23,6 +24,7 @@ const events: Event[] = [
       id: '2',
       title: 'Conferência de Tecnologia',
       subtitle: 'As últimas tendências em tecnologia',
+      img: 'https://sujeitoprogramador.com/instareact/fotoPerfil2.png',
       description: 'Uma conferência abrangente sobre as últimas tendências e inovações em tecnologia. Inclui palestras e painéis de especialistas da indústria.',
       type_event_id: {
         id: '2',
@@ -35,6 +37,7 @@ const events: Event[] = [
       id: '3',
       title: 'Encontro de Networking',
       subtitle: 'Conecte-se com outros profissionais',
+      img: 'https://sujeitoprogramador.com/instareact/fotoPerfil3.png',
       description: 'Um evento de networking para profissionais da indústria. Uma ótima oportunidade para expandir sua rede de contatos e trocar ideias com colegas.',
       type_event_id: {
         id: '3',
@@ -71,10 +74,7 @@ export function GeneralScreen(){
             dataList={events}
             eventSelected={(eventId)=>{handleSelectEvent(eventId)}}
           />
-          <EventInfo
-            modalVisible={openEventInfoVisible}
-            setModalVisible={(visible=>setOpenEventInfoVisible(visible))}
-          />
+         
         </View>
     );
 }
