@@ -47,11 +47,14 @@ const events: Event[] = [
 
 export function GeneralScreen(){
 
-  const [evnetSelected, setEventSelected] = useState<Event>();
+  const [evnetSelected, setEventSelected] = useState<Event | undefined>(undefined);
+
+  const [openEventInfoVisible, setOpenEventInfoVisible] = useState(false);
 
   function handleSelectEvent(eventID: string) {
     const selectedEvent = events.find(event => event.id === eventID);
     setEventSelected(selectedEvent);
+    setOpenEventInfoVisible(true)
   }
 
     return(
@@ -68,7 +71,10 @@ export function GeneralScreen(){
             dataList={events}
             eventSelected={(eventId)=>{handleSelectEvent(eventId)}}
           />
-          
+          <EventInfo
+            modalVisible={openEventInfoVisible}
+            setModalVisible={(visible=>setOpenEventInfoVisible(visible))}
+          />
         </View>
     );
 }

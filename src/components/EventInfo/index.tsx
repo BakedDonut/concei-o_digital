@@ -5,27 +5,16 @@ import { styles } from './styles';
 import { Event } from '../../@types/event';
 
 type Props = {
-    event: Event
+    event: Event;
+    visible: boolean;
+    setVisible: ( visible: boolean) => void;
 }
 
 export function EventInfo({event}: Props) {
 
-    const bottomSheetRef = useRef<BottomSheet>(null);
-
-    const handleSheetChanges = useCallback((index: number) => {
-        console.log('handleSheetChanges', index);
-    }, []);
-
   return (
     <View style={styles.container}>
-      <BottomSheet
-        ref={bottomSheetRef}
-        onChange={handleSheetChanges}
-      >
-        <BottomSheetView style={styles.contentContainer}>
-          <Text>Awesome 🎉</Text>
-        </BottomSheetView>
-      </BottomSheet>
+      
     </View>
   );
 }
