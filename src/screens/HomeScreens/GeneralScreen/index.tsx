@@ -3,6 +3,8 @@ import { styles } from "./styles";
 import { EventsList } from "../../../components/EventsList";
 import { Event } from "../../../@types/event";
 import { FilterEvents } from "../../../components/FilterEvents";
+import { EventInfo } from "../../../components/EventInfo";
+import { useState } from "react";
 
 const events: Event[] = [
     {
@@ -44,6 +46,14 @@ const events: Event[] = [
   ];
 
 export function GeneralScreen(){
+
+  const [evnetSelected, setEventSelected] = useState<Event>();
+
+  function handleSelectEvent(eventID: string) {
+    const selectedEvent = events.find(event => event.id === eventID);
+    setEventSelected(selectedEvent);
+  }
+
     return(
         <View style={styles.container}>
           <View style={styles.topFlashlist}>
@@ -54,12 +64,11 @@ export function GeneralScreen(){
               setFilterSelected={(i)=>console.log(i)}
             />
           </View>
-            <EventsList
-                dataList={events}
-            />
-
-            
-
+          <EventsList
+            dataList={events}
+            eventSelected={(eventId)=>{handleSelectEvent(eventId)}}
+          />
+          
         </View>
     );
 }

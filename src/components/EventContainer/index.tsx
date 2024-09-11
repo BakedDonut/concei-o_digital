@@ -1,20 +1,21 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import ClockIcon from '../../assets/icons/clock.svg'
 import { styles } from './styles';
 import { theme } from '../../styles/theme';
 import { Event } from '../../@types/event';
 
 type Props ={
-    event: Event
+    event: Event,
+    eventSelected: ( eventID: string) => void;
 }
 
-export function EventContainer({ event }: Props) {
+export function EventContainer({ event, eventSelected }: Props) {
 
     const formattedDate = event.date.toLocaleDateString(); // You can customize the format as needed
 
   return (
-    <View style={{marginTop: 10}}>
+    <TouchableOpacity style={{marginTop: 10}} onPress={()=>eventSelected(event.id)}>
         <Text style={styles.date}>{formattedDate}</Text>
         <View style={styles.container}>
             <View style={styles.header}>
@@ -33,6 +34,6 @@ export function EventContainer({ event }: Props) {
                 </Text>
             </View>
         </View>
-    </View>
+    </TouchableOpacity>
   );
 }

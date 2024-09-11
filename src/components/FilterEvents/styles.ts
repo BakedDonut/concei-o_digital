@@ -46,7 +46,8 @@ export const styles = StyleSheet.create({
     color: theme.colors.gray_500,
     textAlign: 'center',
     width: 200,
-    height: 40
+    height: 35,
+    marginTop: 10
   },
   backgroundItem:{
     paddingHorizontal: 10,
