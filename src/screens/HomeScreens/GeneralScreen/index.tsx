@@ -74,6 +74,7 @@ export function GeneralScreen(){
           <EventInfo
             modalVisible={openEventInfoVisible}
             setModalVisible={(visible=>setOpenEventInfoVisible(visible))}
+            event={evnetSelected}
           />
         </View>
     );

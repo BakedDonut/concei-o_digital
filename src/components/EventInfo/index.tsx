@@ -5,9 +5,9 @@ import { styles } from './styles';
 import { Event } from '../../@types/event';
 
 type Props = {
-    event: Event;
-    visible: boolean;
-    setVisible: ( visible: boolean) => void;
+    event: Event | undefined;
+    modalVisible: boolean;
+    setModalVisible: ( visible: boolean) => void;
 }
 
 export function EventInfo({event}: Props) {
