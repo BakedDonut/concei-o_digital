@@ -3,16 +3,24 @@ import { Text, View } from 'react-native';
 import ClockIcon from '../../assets/icons/clock.svg'
 import { styles } from './styles';
 import { theme } from '../../styles/theme';
+import { Event } from '../../@types/event';
 
-export function EventContainer() {
+type Props ={
+    event: Event
+}
+
+export function EventContainer({ event }: Props) {
+
+    const formattedDate = event.date.toLocaleDateString(); // You can customize the format as needed
+
   return (
-    <>
-        <Text style={styles.date}>30 de Maio</Text>
+    <View style={{marginTop: 10}}>
+        <Text style={styles.date}>{formattedDate}</Text>
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.type}>Solenidade</Text>
                 <View style={styles.time}>
-                    <ClockIcon fill={theme.colors.gray_300} width={15} height={15}/>
+                    <ClockIcon fill={theme.colors.text} width={15} height={15} style={{marginRight: 5}}/>
                     <Text style={styles.text}>30:30</Text>
                 </View>
             </View>
@@ -28,6 +36,6 @@ export function EventContainer() {
                 </Text>
             </View>
         </View>
-    </>
+    </View>
   );
 }

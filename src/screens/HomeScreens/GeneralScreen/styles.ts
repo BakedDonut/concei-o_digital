@@ -6,9 +6,12 @@ export const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 16,
     },
-    title:{
+    titleFlashlist:{
         fontSize: theme.sizes.extra_large,
         fontFamily: theme.fonts.black,
         color: theme.colors.title
+    },
+    filter:{
+        flexDirection: 'row'
     }
 })

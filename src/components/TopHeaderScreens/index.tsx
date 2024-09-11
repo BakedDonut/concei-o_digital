@@ -2,6 +2,7 @@ import { Image, Text, View } from "react-native";
 import {styles} from "./styles";
 import ImageLogo from '../../assets/images/logo.jpeg'
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { ButtonOpenMainDrawer } from "../ButtonOpenMainDrawer";
 
 export function TopHeaderScreens(){
 
@@ -15,6 +16,7 @@ export function TopHeaderScreens(){
             <View style={styles.space}>
                 <Text style={styles.title}>Conceição Digital</Text>
             </View>
+            <ButtonOpenMainDrawer/>
         </View>
     )
 }

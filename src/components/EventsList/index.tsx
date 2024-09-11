@@ -10,11 +10,13 @@ type Props = {
 };
 
 export function EventsList({ dataList }: Props) {
+
   return (
     <View style={styles.container}>
+      
         <FlashList
             data={dataList}
-            renderItem={EventContainer}
+            renderItem={({ item }) => <EventContainer event={item} />}
             estimatedItemSize={200}
         />
     </View>

@@ -7,9 +7,6 @@ export function NotificationConfigScreen(){
         <View>
             <TopHeaderScreens/>
             <View style={{backgroundColor: 'white', alignItems:'flex-start'}}>
-                <ButtonOpenMainDrawer
-                    width={'25%'}
-                />
             </View>
         </View>
     ); 

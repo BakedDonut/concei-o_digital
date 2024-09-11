@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import { styles } from "../AboutScreen/styles";
+import { styles } from "./styles";
 import { EventsList } from "../../../components/EventsList";
 import { Event } from "../../../@types/event";
 
@@ -45,13 +45,15 @@ const events: Event[] = [
 export function GeneralScreen(){
     return(
         <View style={styles.container}>
-            <Text style={styles.title}>
-                Eventos em destaque
+            <Text style={styles.titleFlashlist}>
+              Eventos em destaque
             </Text>
 
             <EventsList
                 dataList={events}
             />
+
+            
 
         </View>
     );

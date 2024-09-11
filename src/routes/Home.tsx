@@ -11,18 +11,12 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ButtonOpenMainDrawer } from '../components/ButtonOpenMainDrawer';
 import { TopHeaderScreens } from '../components/TopHeaderScreens';
 
-
-
 const Tab = createMaterialTopTabNavigator();
 
 export function Home() {
   return (
     <>
     <TopHeaderScreens/>
-    <View style={{flexDirection: 'row', flex: 1, marginLeft: -100}}>
-      <ButtonOpenMainDrawer
-        width={'25%'}
-      />
       <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: theme.colors.primary, 
@@ -36,8 +30,7 @@ export function Home() {
             backgroundColor: '#fff', 
             elevation: 0, 
             shadowOpacity: 0, 
-            width: '75%',
-            marginLeft: '25%',
+            width: '100%',
           },
           tabBarLabelStyle: {
             fontFamily: theme.fonts.medium, 
@@ -49,7 +42,6 @@ export function Home() {
         <Tab.Screen name="Grupos" component={GroupsScreen} />
         <Tab.Screen name="Sobre" component={AboutSreen} />
       </Tab.Navigator>
-    </View>
     </>
   );
 }

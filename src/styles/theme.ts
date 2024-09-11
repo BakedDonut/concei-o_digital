@@ -21,7 +21,6 @@ export const theme = {
   },
   fonts:{
     regular: 'Roboto_400Regular',
-    bold: 'Roboto_700Bold',
     black: 'Roboto_900Black',
     medium: 'Roboto_500Medium',
   },
