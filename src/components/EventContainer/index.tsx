@@ -21,18 +21,15 @@ export function EventContainer({ event }: Props) {
                 <Text style={styles.type}>Solenidade</Text>
                 <View style={styles.time}>
                     <ClockIcon fill={theme.colors.text} width={15} height={15} style={{marginRight: 5}}/>
-                    <Text style={styles.text}>30:30</Text>
+                    <Text style={styles.text}>{event.time}</Text>
                 </View>
             </View>
             <View style={styles.content}>
                 <Text style={styles.title}>
-                    Solenidade de Corpus Cristi
+                   {event.title}
                 </Text>
                 <Text style={styles.text}>
-                    xxxxx xxxx xxxx xxx xxx x x xxxxxxxxxx  xxxxxx
-                    xx xxxx xxxx xxxx xxxx xxx x xxxxxxxxxxxxxxxx
-                    x xxxx xxx xxxx xxx xxxx xx xxxxxxxxxxxxx xxxx 
-                    xxx xxx xxx xxx xxx xxxx x xxxxxxxxxxxxxxxxx x
+                    {event.description}
                 </Text>
             </View>
         </View>

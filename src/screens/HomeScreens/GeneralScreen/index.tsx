@@ -2,6 +2,7 @@ import { Text, View } from "react-native";
 import { styles } from "./styles";
 import { EventsList } from "../../../components/EventsList";
 import { Event } from "../../../@types/event";
+import { FilterEvents } from "../../../components/FilterEvents";
 
 const events: Event[] = [
     {
@@ -45,10 +46,14 @@ const events: Event[] = [
 export function GeneralScreen(){
     return(
         <View style={styles.container}>
+          <View style={styles.topFlashlist}>
             <Text style={styles.titleFlashlist}>
               Eventos em destaque
             </Text>
-
+            <FilterEvents
+              setFilterSelected={(i)=>console.log(i)}
+            />
+          </View>
             <EventsList
                 dataList={events}
             />
