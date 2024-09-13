@@ -14,7 +14,7 @@ type Props = {
 export function EventContainer({ event, eventSelected }: Props) {
   const formattedDate = new Date(event.date).toLocaleDateString('pt-BR'); // Personalize o formato conforme necessário
 
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
   function openModal() {
     setModalVisible(true);
@@ -26,7 +26,7 @@ export function EventContainer({ event, eventSelected }: Props) {
 
   return (
     <TouchableOpacity style={{ marginTop: 10 }} onPress={openModal}>
-      <Modal transparent={false} animationType="slide" visible={modalVisible}>
+      <Modal transparent={true} animationType="slide" visible={modalVisible}>
         <EventsDetails close={closeModal} />
       </Modal>
 

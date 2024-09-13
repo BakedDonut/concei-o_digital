@@ -50,7 +50,7 @@ const events: Event[] = [
 
 export function GeneralScreen(){
 
-  const [evnetSelected, setEventSelected] = useState<Event | undefined>(undefined);
+  const [eventSelected, setEventSelected] = useState<Event | undefined>(undefined);
 
   const [openEventInfoVisible, setOpenEventInfoVisible] = useState(false);
 
