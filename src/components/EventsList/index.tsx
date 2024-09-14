@@ -18,6 +18,7 @@ export function EventsList({ dataList, eventSelected }: Props) {
             data={dataList}
             renderItem={({ item }) => <EventContainer event={item} eventSelected={(eventId)=>{eventSelected(eventId)}}/>}
             estimatedItemSize={200}
+            showsVerticalScrollIndicator={false}
         />
     </View>
   );

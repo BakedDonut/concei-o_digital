@@ -16,7 +16,8 @@ export const styles = StyleSheet.create({
   },
   title:{
     fontSize: theme.sizes.extra_large,
-    fontFamily: theme.fonts.bold,
+    fontFamily: theme.fonts.regular,
     color: theme.colors.primary,
+    marginBottom: 10
   }
 });

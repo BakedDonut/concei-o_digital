@@ -10,4 +10,5 @@ export type Event = {
     };
     time: string;
     date: Date;
+    location: string;
 };

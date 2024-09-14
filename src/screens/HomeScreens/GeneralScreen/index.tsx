@@ -10,15 +10,16 @@ const events: Event[] = [
     {
       id: '1',
       title: 'Workshop de React Native',
-      subtitle: 'Aprenda a construir aplicativos móveis',
-      img: 'https://sujeitoprogramador.com/instareact/fotoPerfil1.png',
-      description: 'Um workshop interativo sobre desenvolvimento com React Native. Ideal para desenvolvedores iniciantes e intermediários.',
+      subtitle: 'Após a missa, procissão até a Praça Tiradentes, encerrando-se encerrando-se com a benção do Santíssimo Sacramento.',
+      img: 'https://drive.google.com/uc?export=view&id=1Gs20kb5VeZamqOcvWt_jQceFRFTaw5pU&authuser=4',
+      description: 'Querido irmão e querida irmã, convidamos você a participar conosco deste profundo momento de espiritualidade, que é a celebração de Corpus Christi🙏🏼Participar da Celebração de Corpus Christi é uma oportunidade de renovar nossa conexão espiritual e reafirmar nossa fé na presença real de Cristo na Eucaristia. Esta celebração nos lembra da importância do sacrifício de Jesus e do amor que Ele nos demonstra através do sacramento da comunhão.🗓️No próximo dia 30 de maio, às 16h, na Catedral Imaculada Conceição, vamos juntos celebrar juntos!',
       type_event_id: {
         id: '1',
         name: 'Workshop',
       },
       time: '10:00 AM',
       date: new Date('2024-09-15T10:00:00Z'), // Data e hora do evento
+      location: 'Online',
     },
     {
       id: '2',
@@ -32,6 +33,7 @@ const events: Event[] = [
       },
       time: '02:00 PM',
       date: new Date('2024-09-20T14:00:00Z'), // Data e hora do evento
+      location: 'Online',
     },
     {
       id: '3',
@@ -45,6 +47,7 @@ const events: Event[] = [
       },
       time: '06:00 PM',
       date: new Date('2024-09-25T18:00:00Z'), // Data e hora do evento
+      location: 'Online',
     },
   ];
 

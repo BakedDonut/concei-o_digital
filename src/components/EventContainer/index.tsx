@@ -27,12 +27,12 @@ export function EventContainer({ event, eventSelected }: Props) {
   return (
     <TouchableOpacity style={{ marginTop: 10 }} onPress={openModal}>
       <Modal transparent={true} animationType="slide" visible={modalVisible}>
-        <EventsDetails close={closeModal} />
+        <EventsDetails close={closeModal} event={event}/>
       </Modal>
 
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.type}>{event.title}</Text>
+          <Text style={styles.type}>{'solenidade'}</Text>
           <View>
             <Text style={styles.date}>{formattedDate}</Text>
             <View style={styles.time}>
@@ -48,12 +48,12 @@ export function EventContainer({ event, eventSelected }: Props) {
         </View>
 
         <View style={styles.content}>
-          <Text style={styles.title}>{event.subtitle}</Text>
+          <Text style={styles.title}>{event.title}</Text>
           <Image
             style={{ height: 300, alignItems: 'center' }}
             source={{ uri: event.img }}
           />
-          <Text style={styles.text}>{event.description}</Text>
+          <Text style={styles.text}>{event.subtitle}</Text>
         </View>
       </View>
     </TouchableOpacity>

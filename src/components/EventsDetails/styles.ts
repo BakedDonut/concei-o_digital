@@ -2,32 +2,73 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { theme } from '../../styles/theme';
 
 const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
 
 export const styles = StyleSheet.create({
   header: {
-    height: 48,
     backgroundColor: '#fff',
     flexDirection: 'row',
     paddingLeft: 15,
-    paddingTop: 14,
     borderBottomWidth: 0.2,
-    shadowColor: '#000',
-    elevation: 3,
-    alignItems: 'center'
-
+    alignItems: 'center',
+    borderBottomColor: theme.colors.primary,
+    width: '100%',
   },
   textBtn: {
     color: theme.colors.primary,
     fontSize: theme.sizes.large,
+    fontFamily: theme.fonts.medium,
     marginLeft: 8,
+    paddingVertical: 20
   },
-
   modalContainer: {
-    height: screenHeight * 0.9, // 90% da altura da tela
+    height: screenHeight, 
     backgroundColor: 'white', // Defina a cor de fundo que desejar
-    borderTopLeftRadius: 20, // Raio para o efeito de bordas arredondadas (opcional)
-    borderTopRightRadius: 20,
     marginTop: 'auto', // Para que o modal apareça na parte inferior da tela
   },
+  content:{
+    paddingHorizontal: 16,
+    alignItems: 'center',
+    marginTop: 20
+  },
+  title:{
+    fontFamily: theme.fonts.black,
+    fontSize: theme.sizes.extra_large,
+    color: theme.colors.primary,
+    marginTop: 10,
+    textAlign: 'center'
+  },
+  subtitle:{
+    fontFamily: theme.fonts.regular,
+    fontSize: theme.sizes.medium,
+    color: theme.colors.gray_500,
+    textAlign: 'center',
+    width: screenWidth -32,
+  },
+  conent2:{
+    width: screenWidth -32,
+    justifyContent: 'flex-start',
+  },
+  item:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginTop: 20
+  },
+  text: {
+    fontFamily: theme.fonts.regular,
+    fontSize: theme.sizes.medium,
+    color: theme.colors.text,
+    marginLeft: 10
+  },
+  descriptionTitle:{
+    fontFamily: theme.fonts.medium,
+    fontSize: theme.sizes.medium,
+    color: 'black',
+  },
+  descriptionContent:{
+    marginTop: 14,
+    paddingBottom: 70,
+  }
   
 });
