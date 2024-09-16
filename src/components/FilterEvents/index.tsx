@@ -29,7 +29,7 @@ export function FilterEvents({setFilterSelected}:Props) {
   return (
     <View style={styles.container}>
         <TouchableOpacity style={styles.buttonOpenModal} onPress={()=>setModalVisible(true)}>
-          <Text style={styles.textButtonOpenModal}>Essa semana</Text>
+          <Text style={styles.textButtonOpenModal}>{filter}</Text>
           <CaretDownIcon fill={theme.colors.text} width={10} height={10}/>
         </TouchableOpacity>
 
