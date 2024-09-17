@@ -6,7 +6,7 @@ import { styles } from './styles';
 import { theme } from '../../styles/theme';
 import XIcon from '../../assets/icons/x.svg'
 
-type OptionsFilter = 'Hoje' | 'Essa semana' | 'Esse mês' | 'Esse ano';
+type OptionsFilter = 'Hoje' | 'Essa semana' | 'Esse mês' | 'Esse ano' | 'Sempre';
 
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 
 export function FilterEvents({setFilterSelected}:Props) {
 
-  const [filter, setFilter] = useState<OptionsFilter>();
+  const [filter, setFilter] = useState<OptionsFilter>('Sempre');
   const filterOptions: OptionsFilter[] = ['Hoje', 'Essa semana', 'Esse mês', 'Esse ano'];
 
   const [modalVisible, setModalVisible] = useState(false);

@@ -1,6 +1,7 @@
 import { View } from "react-native";
+import { styles } from './styles';
 
-export function DeleteEventScreen(){
+export function EditEventScreen(){
     return(
         <View>
         </View>

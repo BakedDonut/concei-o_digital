@@ -11,8 +11,10 @@ export const styles = StyleSheet.create({
   textButtonOpenModal:{
     color: theme.colors.text,
     fontFamily: theme.fonts.regular,
-    fontSize: theme.sizes.medium,
-    paddingRight: 5
+    fontSize: theme.sizes.large,
+    paddingRight: 5,
+    marginBottom: 5,
+    marginTop: 2
   },
   centeredView:{
     flex: 1,

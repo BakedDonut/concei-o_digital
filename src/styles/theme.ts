@@ -15,9 +15,12 @@ export const theme = {
 
     primary: '#A59067',
     primary_background: '#FEF6DC',
+    primary_bright: '#D4AF37',
     gray_yellow: '#757575',
     title: '#282828',
-    text: '#404040'
+    text: '#404040',
+    background_text_input: '#F8FAFB',
+    labal: '#212432'
   },
   fonts:{
     regular: 'Roboto_400Regular',

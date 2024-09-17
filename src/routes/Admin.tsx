@@ -1,6 +1,6 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { CreateEventScreen } from '../screens/AdminScreens/CreateEventScreen';
-import { DeleteEventScreen } from '../screens/AdminScreens/DeleteEventScreen';
+import { EditEventScreen } from '../screens/AdminScreens/EditEventScreen';
 import { theme } from '../styles/theme';
 import { ButtonOpenMainDrawer } from '../components/ButtonOpenMainDrawer';
 import { TopHeaderScreens } from '../components/TopHeaderScreens';
@@ -12,7 +12,6 @@ export function Admin() {
   return (
     <>
     <TopHeaderScreens/>
-    <View style={{flexDirection: 'row', width: '100%'}}>
       <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: theme.colors.primary, 
@@ -34,17 +33,9 @@ export function Admin() {
           },
         }}
       >
-        <Tab.Screen 
-          name="Criar" 
-          component={CreateEventScreen} 
-        />
-        <Tab.Screen 
-          name="Deletar" 
-          component={DeleteEventScreen} 
-        />
+        <Tab.Screen name="Criar" component={CreateEventScreen}/>
+        <Tab.Screen name="Editar" component={EditEventScreen} />
       </Tab.Navigator>
-      
-    </View>
     </>
   );
 }
