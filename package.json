@@ -12,9 +12,11 @@
     "@expo-google-fonts/roboto": "^0.2.3",
     "@gorhom/bottom-sheet": "^4.6.4",
     "@hookform/resolvers": "^3.9.0",
+    "@react-native-community/datetimepicker": "8.0.1",
     "@react-navigation/drawer": "^6.7.2",
     "@react-navigation/material-top-tabs": "^6.6.14",
     "@react-navigation/native": "^6.1.18",
+    "@react-navigation/native-stack": "^6.11.0",
     "@shopify/flash-list": "1.6.4",
     "expo": "~51.0.28",
     "expo-font": "~12.0.10",
@@ -29,8 +31,7 @@
     "react-native-svg": "15.2.0",
     "react-native-tab-view": "^3.5.2",
     "react-native-vector-icons": "^10.1.0",
-    "zod": "^3.23.8",
-    "@react-native-community/datetimepicker": "8.0.1"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

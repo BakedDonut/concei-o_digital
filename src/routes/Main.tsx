@@ -5,6 +5,7 @@ import { Home } from './Home';
 import { Admin } from './Admin';
 import { NotificationConfigScreen } from '../screens/NotificationConfigScreen';
 import { theme } from '../styles/theme';
+import { Auth } from './Auth';
 
 const Drawer = createDrawerNavigator();
 
@@ -32,7 +33,7 @@ export function Main() {
       >
         <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Notificações" component={NotificationConfigScreen} />
-        <Drawer.Screen name="Editar eventos(administrador)" component={Admin} />
+        <Drawer.Screen name="Editar eventos(administrador)" component={Auth} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
