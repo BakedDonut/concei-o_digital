@@ -56,10 +56,14 @@ export const styles = StyleSheet.create({
       fontSize: theme.sizes.small
     },
     dataTimeText:{
-      width: 100, 
+      width: 120,
       textAlign: 'center',
       fontSize: theme.sizes.large,
       fontFamily: theme.fonts.medium,
-      color: theme.colors.text
+      color: theme.colors.text,
+      backgroundColor: theme.colors.background_text_input,
+      padding: 5,
+      borderRadius: 5,
+      height: 40
     }
 });

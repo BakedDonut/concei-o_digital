@@ -6,13 +6,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { styles } from './styles';
 import { SelectTypeEvent } from '../../../components/SelectTypeEvent';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
+import { theme } from '../../../styles/theme';
 
 const validateTimeRange = (value: string) => {
     const [hours, minutes] = value.split(':').map(Number);
-    if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
-        return false;
-    }
-    return true;
+    return hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59;
 };
 
 const eventSchema = z.object({
@@ -39,7 +38,8 @@ export function CreateEventScreen() {
     });
 
     const [selectedEventType, setSelectedEventType] = useState<string | null>(null);
-    const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+    const [selectedDate, setSelectedDate] = useState<string>('00/00/0000');
+    const [openSelectDate, setOpenSelectDate] = useState(false);
 
     const onSubmit = (data: FormValues) => {
         console.log(data);
@@ -58,12 +58,18 @@ export function CreateEventScreen() {
         return formattedText;
     };
 
-    const onDateChange = (event: any, selectedDate: Date | undefined) => {
-        setShowDatePicker(false);
-        if (selectedDate) {
-            setSelectedDate(selectedDate);
-            setValue('date', selectedDate.toLocaleDateString('pt-BR'));
-        }
+    const formatDate = (date: Date) => {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses começam em 0
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    };
+
+    const onChangeDate = (event: any, selectedDate: Date | undefined) => {
+        const currentDate = selectedDate || new Date();
+        setOpenSelectDate(false);
+        setSelectedDate(formatDate(currentDate));
+        setValue('date', formatDate(currentDate));
     };
 
     return (
@@ -114,7 +120,7 @@ export function CreateEventScreen() {
                         name="description"
                         render={({ field: { onChange, onBlur, value } }) => (
                             <TextInput
-                                style={[styles.inputText, { height: 200, textAlignVertical: 'top' }]}
+                                style={[styles.inputText, { height: 200, textAlignVertical: 'top' }] }
                                 onBlur={onBlur}
                                 onChangeText={onChange}
                                 value={value}
@@ -142,23 +148,13 @@ export function CreateEventScreen() {
                     {locationValue === undefined && <Text style={styles.attentionText}>Caso não insira um local específico, será: Igreja Matriz</Text>}
                 </View>
                 <View style={styles.dataTimeContainer}>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.label}>Data</Text>
-                        <Controller
-                            control={control}
-                            name="date"
-                            render={({ field: { onChange, onBlur, value } }) => (
-                                <TextInput
-                                    style={[styles.dataTimeText, { width: 100, textAlign: 'center' }]}
-                                    placeholder="00/00/0000"
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
-                                />
-                            )}
-                        />
+                    <TouchableOpacity style={styles.inputContainer} onPress={() => setOpenSelectDate(true)}>
+                        <Text style={styles.label}>Data prevista</Text>
+                        <Text style={[styles.dataTimeText]}>
+                            {selectedDate}
+                        </Text>
                         {errors.date && <Text style={styles.errorText}>{errors.date.message}</Text>}
-                    </View>
+                    </TouchableOpacity>
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Hora</Text>
                         <Controller
@@ -166,7 +162,7 @@ export function CreateEventScreen() {
                             name="time"
                             render={({ field: { onChange, onBlur, value } }) => (
                                 <TextInput
-                                    style={[styles.dataTimeText, {  }]}
+                                    style={[styles.dataTimeText]}
                                     placeholder="00:00"
                                     keyboardType="number-pad"
                                     onBlur={onBlur}
@@ -175,18 +171,30 @@ export function CreateEventScreen() {
                                 />
                             )}
                         />
-                        {errors.time && <Text style={styles.errorText}>{errors.time.message}</Text>}
+                        {errors.time && <Text style={[styles.errorText, {width: 120}]}>{errors.time.message}</Text>}
                     </View>
                 </View>
                 <SelectTypeEvent
                     onSelectEvent={(selected) => {
                         setSelectedEventType(selected);
+                        setValue('eventType', selected); // Atualiza o valor do campo no formulário
                     }}
                 />
-                {errors.eventType && <Text style={styles.errorText}>{errors.eventType.message}</Text>}
+                {errors.eventType && <Text style={styles.errorText}>Tipo de evento é obrigatório</Text>}
                 <TouchableOpacity style={styles.containerCreateEvent} onPress={handleSubmit(onSubmit)}>
                     <Text style={styles.textCreateEvent}>Criar evento</Text>
                 </TouchableOpacity>
+                {
+                    openSelectDate &&
+                    <RNDateTimePicker 
+                        value={new Date()}
+                        mode="date" 
+                        positiveButton={{label: 'Selecionar', textColor: theme.colors.primary}} 
+                        negativeButton={{label: 'Voltar', textColor: theme.colors.primary}}
+                        style={{flex: 1}} 
+                        onChange={onChangeDate}
+                    />
+                }
             </ScrollView>
         </KeyboardAvoidingView>
     );
