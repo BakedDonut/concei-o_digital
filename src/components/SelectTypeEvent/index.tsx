@@ -10,6 +10,7 @@ import XIcon from '../../assets/icons/x.svg'
 
 type Props = {
   onSelectEvent: (event: string) => void;
+  eventDefaultSelected?: string;
 };
 
 const dataList = [
@@ -34,7 +35,7 @@ const dataList = [
   'Dia de São José'
 ];
 
-export function SelectTypeEvent({onSelectEvent}: Props) {
+export function SelectTypeEvent({onSelectEvent, eventDefaultSelected}: Props) {
 
   const [selectTypeEventVisible, setSelectTypeEventVisible] = useState(false);
 
@@ -49,7 +50,7 @@ export function SelectTypeEvent({onSelectEvent}: Props) {
   return (
     <>
     <TouchableOpacity style={styles.containerButtonOpenModal} onPress={()=>setSelectTypeEventVisible(true)}>
-      <Text style={styles.textButtonOpenModal}>{itemSelected}</Text>
+      <Text style={styles.textButtonOpenModal}>{eventDefaultSelected?eventDefaultSelected:itemSelected}</Text>
       <CaretDownIcon fill={theme.colors.text} width={15} height={15}/>
     </TouchableOpacity>
     <Modal

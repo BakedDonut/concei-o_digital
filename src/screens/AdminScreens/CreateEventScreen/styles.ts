@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
     textCreateEvent:{
       color: 'white',
       fontFamily: theme.fonts.black,
-      fontSize: theme.sizes.medium
+      fontSize: theme.sizes.large
     },
     errorText:{
       color: 'red',

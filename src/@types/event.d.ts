@@ -4,7 +4,7 @@ export type Event = {
     subtitle: string;
     img: string;
     description: string;
-    type_event_id: {
+    event_type: {
       id: string;
       name: string;
     };
