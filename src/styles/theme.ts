@@ -20,7 +20,7 @@ export const theme = {
     title: '#282828',
     text: '#404040',
     background_text_input: '#F8FAFB',
-    labal: '#212432'
+    label: '#212432'
   },
   fonts:{
     regular: 'Roboto_400Regular',

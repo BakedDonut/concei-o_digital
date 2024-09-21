@@ -7,12 +7,12 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
         flexDirection: 'row',
-        paddingHorizontal: 20,
-        paddingVertical: 16,
+        paddingHorizontal: 16,
+        paddingVertical: 10,
     },
     image:{
-        width: 70,
-        height: 70,
+        width: 65,
+        height: 65,
         borderRadius: 100
     },
     title:{

@@ -16,6 +16,11 @@ export default function App() {
     return <LoadingScreen/>;
   }
 
+  if (fontError) {
+    console.error('Error loading fonts: ', fontError);
+    return <LoadingScreen />;
+  }
+
   return (
     <>
       <StatusBar style="auto" />
@@ -24,4 +29,3 @@ export default function App() {
   );
 }
 
-//

@@ -57,7 +57,7 @@ export function LoginScreen() {
             >
                 <View style={styles.top}>
                     <TouchableOpacity onPress={handleSignOut} activeOpacity={0.7} style={styles.buttonBack}>
-                        <BackIcon fill={theme.colors.labal} width={25} height={25}/>
+                        <BackIcon fill={theme.colors.label} width={25} height={25}/>
                         <Text style={styles.textBack}>Voltar</Text>
                     </TouchableOpacity>
                 </View>
