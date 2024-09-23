@@ -39,7 +39,7 @@ export function Home() {
         }}
       >
         <Tab.Screen name="Geral" component={GeneralScreen}/>
-        <Tab.Screen name="Grupos" component={Groups} />
+        <Tab.Screen name="Grupos" component={Groups}/>
         <Tab.Screen name="Sobre" component={AboutSreen} />
       </Tab.Navigator>
     </>

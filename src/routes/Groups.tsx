@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { GroupListScreen } from '../screens/GroupListScreen';
+import { GroupListScreen } from '../screens/HomeScreens/GroupListScreen';
 import { SelectGroupScreen } from '../screens/HomeScreens/SelectGroupScreen';
 
 const Stack = createNativeStackNavigator();

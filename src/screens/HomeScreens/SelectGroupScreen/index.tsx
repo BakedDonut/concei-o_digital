@@ -35,7 +35,6 @@ export function SelectGroupScreen() {
     const navigation = useNavigation<NavigationProps>(); 
 
     function handleSelectItem(id: string) {
-        console.log('selected item: ', id);
         navigation.navigate('GroupListScreen', { typeGroupSearch: id });
     }
     
