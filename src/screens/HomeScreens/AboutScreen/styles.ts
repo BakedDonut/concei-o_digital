@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 16,
     },
     title:{
-        fontFamily: theme.fonts.bold,
+        fontFamily: theme.fonts.black,
         fontSize: theme.sizes.extra_large,
         textAlign: 'left'
     },

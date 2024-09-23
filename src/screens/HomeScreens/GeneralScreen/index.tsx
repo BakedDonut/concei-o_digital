@@ -62,7 +62,6 @@ export function GeneralScreen(){
 
   const [filteredEvents, setFilteredEvents] = useState<Event[]>(events);
 
-  
   function handleSelectEvent(eventID: string) {
     const selectedEvent = events.find(event => event.id === eventID);
     setEventSelected(selectedEvent);

@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
         backgroundColor: '#fff',
         flexDirection: 'row',
         paddingHorizontal: 16,
-        paddingVertical: 10,
+        paddingTop: 10,
     },
     image:{
         width: 65,
