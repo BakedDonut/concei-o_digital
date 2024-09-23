@@ -4,6 +4,10 @@ import { Image, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 import { FlashList } from '@shopify/flash-list';
 import { Text } from 'react-native';
+import { RouteProp, useNavigation } from '@react-navigation/native';
+import { NavigationProps } from '../../../@types/navigation';
+
+
 
 let urlTest = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Cathedral_Notre-Dame_de_Reims%2C_France-PerCorr.jpg/1200px-Cathedral_Notre-Dame_de_Reims%2C_France-PerCorr.jpg'
 
@@ -26,13 +30,15 @@ const data = [
     { id: 16, name: 'Grupo de Terço', image: urlTest }
 ]
 
-export function GroupsScreen() {
+export function SelectGroupScreen() {
 
+    const navigation = useNavigation<NavigationProps>(); 
 
-    function handleSelectItem(id: string){
-        console.log('selected item: ', id)
+    function handleSelectItem(id: string) {
+        console.log('selected item: ', id);
+        navigation.navigate('GroupListScreen', { typeGroupSearch: id });
     }
-
+    
   return (
     <View style={styles.container}>
         <View style={{width: '100%', height: '100%'}}>
