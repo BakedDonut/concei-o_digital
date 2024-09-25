@@ -2,13 +2,14 @@ export type Event = {
     id: string; 
     title: string;
     subtitle: string;
-    img: string;
     description: string;
     event_type: {
       id: string;
       name: string;
+      image: string;
     };
     time: string;
-    date: Date;
+    start_date: Date;
+    end_date: Date;
     location: string;
 };

@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { Main } from './src/routes/Main';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFonts, Roboto_400Regular, Roboto_900Black, Roboto_500Medium } from '@expo-google-fonts/roboto';
 import { LoadingScreen } from './src/screens/LoadingScreen';
+
 
 export default function App() {
 
@@ -11,6 +12,8 @@ export default function App() {
     Roboto_900Black,
     Roboto_500Medium
   });
+
+  
 
   if (!fontsLoaded) {
     return <LoadingScreen/>;

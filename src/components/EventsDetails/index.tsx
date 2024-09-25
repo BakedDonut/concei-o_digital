@@ -39,14 +39,18 @@ export default function EventsDetails({ close, event }: Props) {
           <CrossIcon width={26} height={32} fill={theme.colors.primary}/>
           <Text style={styles.title}>{event.title}</Text>
           <Image 
-            source={{ uri: event.img }}
+            source={{ uri: event.event_type.image }}
             style={{ width: screenWidth -diminueDimention, height: screenWidth - diminueDimention, borderRadius: 10, marginTop: 10 }}
           />
           <Text style={styles.subtitle}>{event.subtitle}</Text>
           <View style={styles.conent2}>
               <View style={styles.item}>
                 <CalendarIcon width={20} height={20} fill={theme.colors.text}/>
-                <Text style={styles.text}>{new Date(event.date).toLocaleDateString('pt-BR')}</Text>
+                <Text style={styles.text}>{
+                  new Date(event.start_date).toLocaleDateString('pt-BR')
+                  +' até '+
+                  new Date(event.end_date).toLocaleDateString('pt-BR')
+                }</Text>
               </View>
               <View style={styles.item}>
                 <ClockIcon width={20} height={20} fill={theme.colors.text}/>

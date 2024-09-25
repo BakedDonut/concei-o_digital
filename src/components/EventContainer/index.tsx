@@ -12,7 +12,7 @@ type Props = {
 };
 
 export function EventContainer({ event, eventSelected }: Props) {
-  const formattedDate = new Date(event.date).toLocaleDateString('pt-BR'); // Personalize o formato conforme necessário
+  const formattedDate = new Date(event.start_date).toLocaleDateString('pt-BR'); // Personalize o formato conforme necessário
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -51,7 +51,7 @@ export function EventContainer({ event, eventSelected }: Props) {
           <Text style={styles.title}>{event.title}</Text>
           <Image
             style={{ height: 300, alignItems: 'center' }}
-            source={{ uri: event.img }}
+            source={{ uri: event.event_type.image }}
           />
           <Text style={styles.text}>{event.subtitle}</Text>
         </View>

@@ -6,8 +6,9 @@ import { FilterEvents } from "../../../components/FilterEvents";
 
 import { useEffect, useState } from "react";
 import { FilterType, useFilterEventByDate } from "../../../hooks/useFilterEventsByDate";
+import { fetchAllEventsApi } from "../../../api/envents";
 
-const events: Event[] = [
+const Xevents = [
     {
       id: '1',
       title: 'Workshop de React Native',
@@ -54,6 +55,8 @@ const events: Event[] = [
 
 export function GeneralScreen(){
 
+  const [events, setEvents] = useState<Event[]>([]);
+
   const [eventSelected, setEventSelected] = useState<Event | undefined>(undefined);
 
   const [openEventInfoVisible, setOpenEventInfoVisible] = useState(false);
@@ -68,7 +71,22 @@ export function GeneralScreen(){
     setOpenEventInfoVisible(true)
   }
 
-  useFilterEventByDate(filterSelected, events, setFilteredEvents)
+  useFilterEventByDate(filterSelected, events, setFilteredEvents)  
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const data = await fetchAllEventsApi();
+        setEvents(data);
+        console.log(data);
+        
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchEvents();
+  }, []);  
 
     return(
         <View style={styles.container}>

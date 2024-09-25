@@ -1,10 +1,11 @@
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { TopHeaderScreens } from "../../components/TopHeaderScreens";
 import { styles } from "./styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlashList } from "@shopify/flash-list";
 import CheckIcon from '../../assets/icons/check.svg';
 import { theme } from "../../styles/theme";
+import { fetchEventTypesApi } from "../../api/envents";
 
 const data = [
     { id: 1, name: 'missas dominicais' },
@@ -25,8 +26,17 @@ const data = [
     { id: 16, name: 'avisos da confirmação' }
 ];
 
+type EventTypes = {
+    id: number,
+    name: string;
+    image: string;
+}
+
 export function NotificationConfigScreen() {
+
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
+
+    const [eventTypes, setEventTypes] = useState<EventTypes[]>([]);
 
     const handleSelectItem = (id: string) => {
         setSelectedItems(prevSelectedItems => {
@@ -36,6 +46,19 @@ export function NotificationConfigScreen() {
                 : [...prevSelectedItems, id];
         });
     };
+    
+    useEffect(() => {
+        const fetchEventTypes = async () => {
+          try {
+            const data = await fetchEventTypesApi();
+            setEventTypes(data);            
+          } catch (err) {
+            console.log(err);
+          }
+        };
+    
+        fetchEventTypes();
+      }, []);  
 
     return (
         <View style={styles.container}>
@@ -47,7 +70,7 @@ export function NotificationConfigScreen() {
                 <Text style={styles.titleSelectEvent}>Selecione os eventos que deseja ser notificado</Text>
                 <View style={{ width: '100%', height: '100%' }}>
                 <FlashList 
-                    data={data}
+                    data={eventTypes}
                     keyExtractor={item => item.id.toString()}
                     showsVerticalScrollIndicator={false}
                     extraData={selectedItems}

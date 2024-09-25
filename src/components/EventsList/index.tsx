@@ -12,7 +12,7 @@ type Props = {
     editOption?: boolean
 };
 
-export function EventsList({ dataList, eventSelected, editOption }: Props) {
+export function EventsList({ dataList, eventSelected, editOption }: Props) {  
 
   return (
     <View style={styles.container}>
