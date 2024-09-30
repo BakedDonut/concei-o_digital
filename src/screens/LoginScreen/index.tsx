@@ -7,6 +7,7 @@ import { NavigationProps } from '../../@types/navigation';
 import { theme } from '../../styles/theme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Logo from '../../assets/images/loginImage.jpeg';
+import { loginUserApi } from '../../api/user';
 
 export function LoginScreen() {
     const navigation = useNavigation<NavigationProps>(); 
@@ -22,27 +23,36 @@ export function LoginScreen() {
 
     const insets = useSafeAreaInsets();
 
-    function handleSubmit() {
-        let valid = true;
+    async function handleSubmit() {
+        try {
+            if(validation()){
+                return ;
+            }
+    
+            const response = await loginUserApi(
+                emailInput,
+                passwordInput
+            );
 
-        // Resetar erros
+            //Armazena no storage os dados de user e armazena também na sessão
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+
+    function validation(){
         setEmailError('');
         setPasswordError('');
 
-        // Validação dos campos
         if (!emailInput) {
             setEmailError('O campo email é obrigatório');
-            valid = false;
         }
         if (!passwordInput) {
             setPasswordError('O campo senha é obrigatório');
-            valid = false;
         }
 
-        if (valid) {
-            console.log(emailInput, passwordInput);
-            // Aqui você pode prosseguir com o login ou outra lógica
-        }
+        return true;
     }
 
     return (
@@ -87,7 +97,7 @@ export function LoginScreen() {
                     </View>
                     
                     <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                        <Text style={styles.textButton}>Criar evento</Text>
+                        <Text style={styles.textButton}>Entrar</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
