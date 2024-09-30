@@ -20,3 +20,16 @@ export async function fetchEventTypesApi(){
         throw error;
     }
 }
+
+export async function fetchEventsbyTypeApi(typeId : string){
+    try {
+        const response = await api.post('/eventsByType',{
+            typeEventId : typeId
+        });   
+             
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}

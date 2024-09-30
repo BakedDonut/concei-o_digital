@@ -6,6 +6,7 @@ import { FlashList } from "@shopify/flash-list";
 import CheckIcon from '../../assets/icons/check.svg';
 import { theme } from "../../styles/theme";
 import { fetchEventTypesApi } from "../../api/envents";
+import { EventTypes } from "../../@types/event";
 
 const data = [
     { id: 1, name: 'missas dominicais' },
@@ -25,12 +26,6 @@ const data = [
     { id: 15, name: 'avisos da eucaristia' },
     { id: 16, name: 'avisos da confirmação' }
 ];
-
-type EventTypes = {
-    id: number,
-    name: string;
-    image: string;
-}
 
 export function NotificationConfigScreen() {
 
