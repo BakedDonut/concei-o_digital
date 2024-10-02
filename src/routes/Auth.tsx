@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator();
 export function Auth() { //É necessário passar pela Auth antes de permitir o usuário editar
   return (
     <Stack.Navigator
-        initialRouteName='Login'
+        initialRouteName='Admin'
         screenOptions={{
             headerShown: false,
         }}

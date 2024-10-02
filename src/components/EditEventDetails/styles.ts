@@ -23,8 +23,8 @@ export const styles = StyleSheet.create({
   },
   modalContainer: {
     height: screenHeight, 
-    backgroundColor: 'white', // Defina a cor de fundo que desejar
-    marginTop: 'auto', // Para que o modal apareça na parte inferior da tela
+    backgroundColor: 'white', 
+    marginTop: 'auto', 
   },
   content:{
     paddingHorizontal: 16,
@@ -81,7 +81,7 @@ export const styles = StyleSheet.create({
     marginVertical: 10
   },
   label:{
-    color: theme.colors.labal,
+    color: theme.colors.label,
     fontFamily: theme.fonts.medium,
     fontSize: theme.sizes.medium
   },
@@ -96,7 +96,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     width: screenWidth -30,
     marginBottom: 20
-    },
+  },
     containerCreateEvent:{
       backgroundColor: theme.colors.primary_bright,
       borderRadius: 5,

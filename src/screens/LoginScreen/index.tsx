@@ -8,6 +8,8 @@ import { theme } from '../../styles/theme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Logo from '../../assets/images/loginImage.jpeg';
 import { loginUserApi } from '../../api/user';
+import { saveUserStorage } from '../../storage/UserStorage';
+import { User } from '../../@types/user';
 
 export function LoginScreen() {
     const navigation = useNavigation<NavigationProps>(); 
@@ -16,6 +18,7 @@ export function LoginScreen() {
     const [passwordInput, setPasswordInput] = useState<string>('');
     const [emailError, setEmailError] = useState<string>('');
     const [passwordError, setPasswordError] = useState<string>('');
+    const [errorLogin, setErrorLogin] = useState<string>();
 
     function handleSignOut() {
         navigation.openDrawer(); 
@@ -25,19 +28,34 @@ export function LoginScreen() {
 
     async function handleSubmit() {
         try {
-            if(validation()){
-                return ;
+            const isvalid = validation();
+            console.log(isvalid);
+            
+            if(isvalid === false){
+                throw 'error';
             }
-    
+
             const response = await loginUserApi(
                 emailInput,
                 passwordInput
             );
 
+            await saveUserStorage(response as unknown as User)
+
             //Armazena no storage os dados de user e armazena também na sessão
         } catch (error) {
-            console.log(error);
             
+            setErrorLogin('Ocorreu algum erro, tente novamente mais tarde')
+            if(error === 'error'){
+                setErrorLogin('')
+            }
+
+            if(error === 'User not found'){
+                setErrorLogin('Usuário não encontrado')
+            }
+            if(error === 'Email or password incorrect'){
+                setErrorLogin('Email ou senha incorretos')
+            }
         }
     }
 
@@ -47,9 +65,11 @@ export function LoginScreen() {
 
         if (!emailInput) {
             setEmailError('O campo email é obrigatório');
+            return false;
         }
         if (!passwordInput) {
             setPasswordError('O campo senha é obrigatório');
+            return false;
         }
 
         return true;
@@ -95,6 +115,8 @@ export function LoginScreen() {
                         />
                         {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
                     </View>
+
+                    {errorLogin ? <Text style={styles.errorText}>{errorLogin}</Text> : null}
                     
                     <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                         <Text style={styles.textButton}>Entrar</Text>

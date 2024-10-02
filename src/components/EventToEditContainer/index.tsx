@@ -14,7 +14,7 @@ type Props = {
 };
 
 export function EventToEditContainer({ event, eventSelected }: Props) {
-  const formattedDate = new Date(event.date).toLocaleDateString('pt-BR'); // Personalize o formato conforme necessário
+  const formattedDate = new Date(event.start_date).toLocaleDateString('pt-BR'); // Personalize o formato conforme necessário
 
   const [modalVisible, setModalVisible] = useState(false);
 

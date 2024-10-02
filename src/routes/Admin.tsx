@@ -33,8 +33,8 @@ export function Admin() {
           },
         }}
       >
-        <Tab.Screen name="Criar" component={CreateEventScreen}/>
         <Tab.Screen name="Editar" component={EditEventScreen} />
+        <Tab.Screen name="Criar" component={CreateEventScreen}/>
       </Tab.Navigator>
     </>
   );
