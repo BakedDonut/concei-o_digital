@@ -10,6 +10,8 @@ import Logo from '../../assets/images/loginImage.jpeg';
 import { loginUserApi } from '../../api/user';
 import { saveUserStorage } from '../../storage/UserStorage';
 import { User } from '../../@types/user';
+import { saveAcessTokenStorage } from '../../storage/SessionStorage';
+import { useAuth } from '../../providers/AuthContextProvider';
 
 export function LoginScreen() {
     const navigation = useNavigation<NavigationProps>(); 
@@ -26,10 +28,11 @@ export function LoginScreen() {
 
     const insets = useSafeAreaInsets();
 
+    const { setUser } = useAuth(); // Obtém o usuário e a função de logout
+
     async function handleSubmit() {
         try {
             const isvalid = validation();
-            console.log(isvalid);
             
             if(isvalid === false){
                 throw 'error';
@@ -40,9 +43,10 @@ export function LoginScreen() {
                 passwordInput
             );
 
-            await saveUserStorage(response as unknown as User)
+            await saveUserStorage(response.user as User)
+            await saveAcessTokenStorage(response.access_token as string)
+            setUser(response.user as User)
 
-            //Armazena no storage os dados de user e armazena também na sessão
         } catch (error) {
             
             setErrorLogin('Ocorreu algum erro, tente novamente mais tarde')

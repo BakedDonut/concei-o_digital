@@ -9,7 +9,7 @@ export async function saveUserStorage(user: User) {
     }
 }
 
-export async function getUserStorage(user: User) {
+export async function getUserStorage() {
     try {
         return await SecureStore.getItemAsync('user');
     } catch (error) {
@@ -18,7 +18,7 @@ export async function getUserStorage(user: User) {
 }
 
 
-export async function deleteUserStorage(user: User) {
+export async function deleteUserStorage() {
     try {
         await SecureStore.deleteItemAsync('user');
     } catch (error) {

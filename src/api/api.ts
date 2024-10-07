@@ -1,6 +1,8 @@
 import { baseUrlApi } from '@env';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
+import { deleteAcessTokenStorage, getAcessTokenStorage } from '../storage/SessionStorage';
+import { deleteUserStorage } from '../storage/UserStorage';
 
 const api = axios.create({
   baseURL: baseUrlApi,
@@ -9,7 +11,7 @@ const api = axios.create({
 // Add a request interceptor
 api.interceptors.request.use(
   async (config) => {
-    const token = await SecureStore.getItem('token');
+    const token = await getAcessTokenStorage();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -21,27 +23,17 @@ api.interceptors.request.use(
 // Add a response interceptor
 api.interceptors.response.use(
   (response) => response,
-  async (error) => {
+  (error) => {
     const originalRequest = error.config;
 
-    // Check if the error status is 401 and originalRequest._retry is not set
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-
-      try {
-        const refreshToken = await SecureStore.getItem('refreshToken');
-        const response = await axios.post(`${baseUrlApi}/api/refresh-token`, { refreshToken });
-        const { token } = response.data;
-
-        await SecureStore.setItem('token', token);
-
-        // Retry the original request with the new token
-        originalRequest.headers.Authorization = `Bearer ${token}`;
-        return api(originalRequest);  // Use the `api` instance for the retry
-      } catch (error) {
-        // Handle refresh token error or redirect to login
-        console.error('Refresh token error:', error);
-      }
+    // Check if the error status is 401
+    if (error.response && error.response.status === 401) {
+      // Handle unauthorized access (e.g., redirect to login)
+      console.error('Unauthorized: Please log in again.');
+      // Optional: Redirect to login or show a message
+      deleteAcessTokenStorage(); // Remove o token
+      deleteUserStorage(); // Remove os dados do usuário
+      delete api.defaults.headers.Authorization; // Remove o cabeçalho de autorização
     }
 
     return Promise.reject(error);
@@ -49,4 +41,3 @@ api.interceptors.response.use(
 );
 
 export default api;
-

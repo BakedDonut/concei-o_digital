@@ -8,6 +8,7 @@ import GearIcon from '../../assets/icons/gear-bold.svg';
 import CalendarIcon from '../../assets/icons/calendar-dots-fill.svg'
 import LocationIcon from '../../assets/icons/map-pin.svg'
 import EditEventDetails from '../EditEventDetails';
+import { formatTime } from '../../utils/formatTime';
 type Props = {
   event: Event;
   eventSelected: (eventID: string) => void;
@@ -59,7 +60,7 @@ export function EventToEditContainer({ event, eventSelected }: Props) {
                 height={15}
                 style={{ marginRight: 5 }}
               />
-              <Text style={styles.text}>{event.time}</Text>
+              <Text style={styles.text}>{formatTime(event.time)}</Text>
             </View>
         </View>
       </View>

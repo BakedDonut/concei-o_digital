@@ -24,7 +24,7 @@ import { SelectTypeEvent } from '../SelectTypeEvent';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import TrashIcon from '../../assets/icons/trash-fill.svg';
 import { formatDate, formatDateToISO } from '../../utils/formatDate';
-import { formatTime } from '../../utils/formtTime';
+import { formatTime } from '../../utils/formatTime';
 import { deleteEventApi, editEventApi } from '../../api/envents';
 
 interface Props {

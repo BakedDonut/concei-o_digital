@@ -5,6 +5,7 @@ import { styles } from './styles';
 import { theme } from '../../styles/theme';
 import { Event } from '../../@types/event';
 import EventsDetails from '../EventsDetails';
+import { formatTime } from '../../utils/formatTime';
 
 type Props = {
   event: Event;
@@ -42,7 +43,7 @@ export function EventContainer({ event, eventSelected }: Props) {
                 height={15}
                 style={{ marginRight: 5 }}
               />
-              <Text style={styles.text}>{event.time}</Text>
+              <Text style={styles.text}>{formatTime(event.time)}</Text>
             </View>
           </View>
         </View>
