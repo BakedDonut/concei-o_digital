@@ -23,5 +23,16 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  notFoundEvent:{
+    color: theme.colors.text,
+    fontFamily: theme.fonts.regular,
+    fontSize: theme.sizes.large
+  },
+  containerNotFoundEvent:{
+    flex: 1,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

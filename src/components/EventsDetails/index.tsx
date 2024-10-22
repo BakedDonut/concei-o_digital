@@ -9,6 +9,7 @@ import { theme } from '../../styles/theme';
 import ClockIcon from '../../assets/icons/clock.svg';
 import CalendarIcon from '../../assets/icons/calendar-dots-fill.svg';
 import PinIcon from '../../assets/icons/map-pin.svg';
+import { formatTime } from '../../utils/formatTime';
 
 interface Props {
   close: () => void;
@@ -54,7 +55,7 @@ export default function EventsDetails({ close, event }: Props) {
               </View>
               <View style={styles.item}>
                 <ClockIcon width={20} height={20} fill={theme.colors.text}/>
-                <Text style={styles.text}>{event.time}</Text>
+                <Text style={styles.text}>{formatTime(event.time)}</Text>
               </View>
               <View style={styles.item}>
                 <PinIcon width={20} height={20} fill={theme.colors.text}/>

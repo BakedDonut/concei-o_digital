@@ -66,7 +66,7 @@ export default function EditEventDetails({ close, event }: Props) {
 
   const [selectedStartDate, setSelectedStartDate] = useState<string>('00/00/0000');
   const [selectedEndDate, setSelectedEndDate] = useState<string>('00/00/0000');
-  const [openSelectDate, setOpenSelectDate] = useState(false);
+  const [openSelectDate, setOpenSelectDate] = useState({visible: false, typeDateUpdate: ''});
   
   const locationValue = watch('location');
 
@@ -121,12 +121,19 @@ export default function EditEventDetails({ close, event }: Props) {
 
   const onChangeDate = (event: any, selectedDate: Date | undefined) => {
     const currentDate = selectedDate || new Date();
-    setOpenSelectDate(false);
+    const type = openSelectDate.typeDateUpdate;        
+    setOpenSelectDate(prevState => ({
+      ...prevState,
+      visible: false
+    }));
     const formattedDate = formatDate(currentDate);
-    setSelectedStartDate(formattedDate);
-    setSelectedEndDate(formattedDate);
-    setValue('start_date', formattedDate);
-    setValue('end_date', formattedDate);
+    if(type === 'start'){
+      setSelectedStartDate(formattedDate);
+      setValue('start_date', formattedDate);
+    }else{
+        setSelectedEndDate(formattedDate);
+        setValue('end_date', formattedDate);
+    }
   };
 
   const handleDeleteEvent = () => {
@@ -230,12 +237,12 @@ export default function EditEventDetails({ close, event }: Props) {
           )}
         </View>
         <View style={styles.dataTimeContainer}>
-          <TouchableOpacity style={styles.inputContainer} onPress={() => setOpenSelectDate(true)}>
+          <TouchableOpacity style={styles.inputContainer} onPress={() => setOpenSelectDate({visible: true, typeDateUpdate:'start'})}>
             <Text style={styles.label}>Data de início</Text>
             <Text style={styles.dataTimeText}>{selectedStartDate}</Text>
             {errors.start_date && <Text style={styles.errorText}>{errors.start_date.message}</Text>}
           </TouchableOpacity>
-          <TouchableOpacity style={styles.inputContainer} onPress={() => setOpenSelectDate(true)}>
+          <TouchableOpacity style={styles.inputContainer} onPress={() => setOpenSelectDate({visible: true, typeDateUpdate:'end'})}>
             <Text style={styles.label}>Data de fim</Text>
             <Text style={styles.dataTimeText}>{selectedEndDate}</Text>
             {errors.end_date && <Text style={styles.errorText}>{errors.end_date.message}</Text>}
@@ -277,7 +284,7 @@ export default function EditEventDetails({ close, event }: Props) {
         <TouchableOpacity style={styles.containerCreateEvent} onPress={handleSubmit(onSubmit)}>
           <Text style={styles.textCreateEvent}>Editar evento</Text>
         </TouchableOpacity>
-        {openSelectDate && (
+        {openSelectDate.visible && (
           <RNDateTimePicker
             value={new Date()}
             mode="date"

@@ -6,8 +6,7 @@ import { useAuth } from '../providers/AuthContextProvider'; // Ajuste o caminho 
 const Stack = createNativeStackNavigator();
 
 export function Auth() {
-  const { user, logout } = useAuth(); // Obtém o usuário e a função de logout
-console.log(user);
+  const { user, logout } = useAuth(); 
 
     return (
         <Stack.Navigator

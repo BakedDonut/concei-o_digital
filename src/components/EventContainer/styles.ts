@@ -45,5 +45,10 @@ export const styles = StyleSheet.create({
     color: '#B79960',
     textAlign: 'left',
     marginBottom: 5
+  },
+  typeText:{
+    fontFamily: theme.fonts.medium,
+    fontSize: theme.sizes.medium,
+    color: theme.colors.white,
   }
 });

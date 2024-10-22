@@ -6,14 +6,14 @@ export const styles = StyleSheet.create({
     height: 'auto',
     width: '100%',
     backgroundColor: 'white',
-    padding: 15,
+    padding: 10,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: theme.colors.gray_400
   },
   date:{
     fontFamily: theme.fonts.regular,
-    fontSize: theme.sizes.large,
+    fontSize: theme.sizes.medium,
     color: theme.colors.text
   },
   header:{
@@ -26,7 +26,10 @@ export const styles = StyleSheet.create({
     paddingVertical: 5,
     backgroundColor: theme.colors.primary_bright,
     borderRadius: 999,
-    color: 'white'
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    marginVertical: 10
   },
   time:{
     flexDirection: 'row',
@@ -40,7 +43,7 @@ export const styles = StyleSheet.create({
     color: theme.colors.text
   },
   content:{
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between'
   },
   title:{
@@ -48,7 +51,6 @@ export const styles = StyleSheet.create({
     fontSize: theme.sizes.large,
     color: theme.colors.primary,
     textAlign: 'left',
-    marginBottom: 5
   },
   headerRight:{
     flexDirection: 'column',
@@ -59,5 +61,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  typeText:{
+    fontFamily: theme.fonts.medium,
+    fontSize: theme.sizes.medium,
+    color: theme.colors.white,
   }
 });
