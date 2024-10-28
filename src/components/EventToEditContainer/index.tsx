@@ -46,7 +46,9 @@ export function EventToEditContainer({ event, eventSelected }: Props) {
             <LocationIcon fill={theme.colors.gray_800} width={18} height={18}/>
             <Text style={styles.text}>{event.location}</Text>
           </View>
-          <Text style={styles.type}>{'solenidade'}</Text>
+          <View style={styles.type}>
+            <Text style={styles.typeText}>{event.event_type.name}</Text>
+          </View>
         </View>
         <View style={styles.bottom}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>

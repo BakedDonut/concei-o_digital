@@ -26,14 +26,16 @@ export function EventContainer({ event, eventSelected }: Props) {
   }
 
   return (
-    <TouchableOpacity style={{ marginTop: 10 }} onPress={openModal}>
+    <TouchableOpacity style={{ marginTop: 10 }} onPress={openModal} activeOpacity={0.9}>
       <Modal transparent={true} animationType="slide" visible={modalVisible}>
         <EventsDetails close={closeModal} event={event}/>
       </Modal>
 
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.type}>{'solenidade'}</Text>
+          <View style={styles.type}>
+            <Text style={styles.typeText}>{event.event_type.name}</Text>
+          </View>
           <View>
             <Text style={styles.date}>{formattedDate}</Text>
             <View style={styles.time}>

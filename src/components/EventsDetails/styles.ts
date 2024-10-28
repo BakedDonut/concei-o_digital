@@ -13,13 +13,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomColor: theme.colors.primary,
     width: '100%',
+    paddingVertical: 10
   },
   textBtn: {
     color: theme.colors.primary,
     fontSize: theme.sizes.large,
     fontFamily: theme.fonts.medium,
     marginLeft: 8,
-    paddingVertical: 20
   },
   modalContainer: {
     height: screenHeight, 

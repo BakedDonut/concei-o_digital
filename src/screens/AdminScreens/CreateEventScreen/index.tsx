@@ -8,6 +8,7 @@ import { SelectTypeEvent } from '../../../components/SelectTypeEvent';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { theme } from '../../../styles/theme';
+import { createEventApi } from '../../../api/envents';
 
 const validateTimeRange = (value: string) => {
     const [hours, minutes] = value.split(':').map(Number);
@@ -19,7 +20,8 @@ const eventSchema = z.object({
     subtitle: z.string().optional(),
     description: z.string().min(1, 'Descrição completa é obrigatória'),
     location: z.string().optional(),
-    date: z.string().regex(/^\d{2}\/\d{2}\/\d{4}$/, 'Data deve estar no formato DD/MM/AAAA'),
+    end_date: z.string().regex(/^\d{2}\/\d{2}\/\d{4}$/, 'Data deve estar no formato DD/MM/AAAA'),
+    start_date: z.string().regex(/^\d{2}\/\d{2}\/\d{4}$/, 'Data deve estar no formato DD/MM/AAAA'),
     time: z.string().regex(/^\d{2}:\d{2}$/, 'Hora deve estar no formato HH:MM').refine(validateTimeRange, 'Hora deve estar dentro do intervalo válido (00:00 a 23:59)'),
     eventType: z.string().min(1, 'Tipo de evento é obrigatório'),
 });
@@ -39,12 +41,26 @@ export function CreateEventScreen() {
 
     const [selectedEventType, setSelectedEventType] = useState<string | null>(null);
     const [selectedDate, setSelectedDate] = useState<string>('00/00/0000');
-    const [openSelectDate, setOpenSelectDate] = useState(false);
+    const [openSelectDate, setOpenSelectDate] = useState<{ visible: boolean; typeDateUpdate: 'start' | 'end' }>({
+        visible: false,
+        typeDateUpdate: 'start'
+    });
+    const [selectedStartDate, setSelectedStartDate] = useState<string>('00/00/0000');
+    const [selectedEndDate, setSelectedEndDate] = useState<string>('00/00/0000');
 
     const onSubmit = (data: FormValues) => {
-        console.log(data);
-        // Handle form submission here
+        createEvent(data);
     };
+
+    async function createEvent(data : any){
+        try {
+            await createEventApi(data)
+        } catch (error) {
+            console.log(error);
+
+            throw (error);            
+        }
+    }
 
     const locationValue = watch('location');
 
@@ -67,10 +83,21 @@ export function CreateEventScreen() {
 
     const onChangeDate = (event: any, selectedDate: Date | undefined) => {
         const currentDate = selectedDate || new Date();
-        setOpenSelectDate(false);
-        setSelectedDate(formatDate(currentDate));
-        setValue('date', formatDate(currentDate));
+        const type = openSelectDate.typeDateUpdate;        
+        setOpenSelectDate(prevState => ({
+            ...prevState,
+            visible: false
+        }));
+        const formattedDate = formatDate(currentDate);
+        if(type === 'start'){
+            setSelectedStartDate(formattedDate);
+            setValue('start_date', formattedDate);
+        }else{
+            setSelectedEndDate(formattedDate);
+            setValue('end_date', formattedDate);
+        }
     };
+console.log(selectedStartDate);
 
     return (
         <KeyboardAvoidingView
@@ -148,44 +175,58 @@ export function CreateEventScreen() {
                     {locationValue === undefined && <Text style={styles.attentionText}>Caso não insira um local específico, será: Igreja Matriz</Text>}
                 </View>
                 <View style={styles.dataTimeContainer}>
-                    <TouchableOpacity style={styles.inputContainer} onPress={() => setOpenSelectDate(true)}>
-                        <Text style={styles.label}>Data prevista</Text>
-                        <Text style={[styles.dataTimeText]}>
-                            {selectedDate}
-                        </Text>
-                        {errors.date && <Text style={styles.errorText}>{errors.date.message}</Text>}
+                    <TouchableOpacity style={styles.inputContainer} onPress={() => setOpenSelectDate({visible: true, typeDateUpdate:'start'})}>
+                        <Text style={styles.label}>Data de início</Text>
+                        <Text style={styles.dataTimeText}>{selectedStartDate}</Text>
+                        {errors.start_date && <Text style={styles.errorText}>{errors.start_date.message}</Text>}
                     </TouchableOpacity>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.label}>Hora</Text>
-                        <Controller
-                            control={control}
-                            name="time"
-                            render={({ field: { onChange, onBlur, value } }) => (
-                                <TextInput
-                                    style={[styles.dataTimeText]}
-                                    placeholder="00:00"
-                                    keyboardType="number-pad"
-                                    onBlur={onBlur}
-                                    onChangeText={(text) => onChange(formatTime(text))}
-                                    value={value}
-                                />
-                            )}
-                        />
-                        {errors.time && <Text style={[styles.errorText, {width: 120}]}>{errors.time.message}</Text>}
-                    </View>
+                    <TouchableOpacity style={styles.inputContainer} onPress={() => setOpenSelectDate({visible: true, typeDateUpdate:'end'})}>
+                        <Text style={styles.label}>Data de fim</Text>
+                        <Text style={styles.dataTimeText}>{selectedEndDate}</Text>
+                        {errors.end_date && <Text style={styles.errorText}>{errors.end_date.message}</Text>}
+                    </TouchableOpacity>
                 </View>
-                <SelectTypeEvent
-                    onSelectEvent={(selected) => {
-                        setSelectedEventType(selected);
-                        setValue('eventType', selected); // Atualiza o valor do campo no formulário
-                    }}
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>Hora</Text>
+                    <Controller
+                        control={control}
+                        name="time"
+                        render={({ field: { onChange, onBlur, value } }) => (
+                        <TextInput
+                            style={styles.dataTimeText}
+                            placeholder="00:00"
+                            keyboardType="number-pad"
+                            onBlur={onBlur}
+                            onChangeText={(time) => {
+                            const formattedTime = formatTime(time);
+                            onChange(formattedTime);
+                            }}
+                            value={value}
+                        />
+                        )}
+                    />
+                    {errors.time && <Text style={[styles.errorText, { width: 120 }]}>{errors.time.message}</Text>}
+                </View>
+                
+                <Controller
+                    control={control}
+                    name="eventType"
+                    render={({ field: { onChange, onBlur, value } }) => (
+                    <SelectTypeEvent
+                        onSelectEvent={(selected) => {
+                            setSelectedEventType(selected.id.toString());
+                            setValue('eventType', selected.id.toString()); // Atualiza o valor do campo no formulário
+                        }}
+                    />
+                    )}
                 />
                 {errors.eventType && <Text style={styles.errorText}>Tipo de evento é obrigatório</Text>}
+
                 <TouchableOpacity style={styles.containerCreateEvent} onPress={handleSubmit(onSubmit)}>
                     <Text style={styles.textCreateEvent}>Criar evento</Text>
                 </TouchableOpacity>
                 {
-                    openSelectDate &&
+                    openSelectDate.visible &&
                     <RNDateTimePicker 
                         value={new Date()}
                         mode="date" 

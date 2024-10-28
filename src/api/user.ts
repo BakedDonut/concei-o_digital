@@ -26,3 +26,4 @@ export async function loginUserApi(email: string, password: string) {
         throw error;
     }
 }
+

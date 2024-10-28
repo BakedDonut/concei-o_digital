@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
-        height: 40,
+        height: 60,
         marginTop: 20,
         backgroundColor: '#fff', 
         shadowColor: '#000', 

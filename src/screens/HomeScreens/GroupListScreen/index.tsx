@@ -32,7 +32,6 @@ export function GroupListScreen() {
       async function fetchEventsbyType(){
         const data = await fetchEventsbyTypeApi(params.typeGroupSearch as string);
         setEvents(data);
-        console.log('fetchEventsbyType'+data);
         
       }
       
@@ -52,6 +51,23 @@ export function GroupListScreen() {
     }
 
     useFilterEventByDate(filterSelected, events, setFilteredEvents);
+
+    if(events.length === 0){
+        return (
+            <View style={styles.containerNotFoundEvent}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Text style={styles.notFoundEvent}>Nenhum evento previsto</Text>
+                </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.goBack()}
+                        style={styles.backButton}
+                    >
+                        <BackIcon fill={theme.colors.text} width={15} height={15}/>
+                        <Text style={styles.txt}>Voltar</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 
     return (
         <View style={styles.container}>
