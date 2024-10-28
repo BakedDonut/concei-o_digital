@@ -42,13 +42,11 @@ export function LoginScreen() {
                 emailInput,
                 passwordInput
             );
-
             await saveUserStorage(response.user as User)
             await saveAcessTokenStorage(response.access_token as string)
             setUser(response.user as User)
 
         } catch (error) {
-            
             setErrorLogin('Ocorreu algum erro, tente novamente mais tarde')
             if(error === 'error'){
                 setErrorLogin('')

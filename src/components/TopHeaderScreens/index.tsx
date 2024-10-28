@@ -1,6 +1,6 @@
 import { Image, Text, View } from "react-native";
 import {styles} from "./styles";
-import ImageLogo from '../../assets/images/logo.jpeg'
+import ImageLogo from '../../assets/images/loginImage.jpeg'
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ButtonOpenMainDrawer } from "../ButtonOpenMainDrawer";
 

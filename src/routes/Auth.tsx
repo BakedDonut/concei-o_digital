@@ -9,6 +9,25 @@ export function Auth() {
   const { user, logout } = useAuth(); // Obtém o usuário e a função de logout
 console.log(user);
 
+    useEffect(() => {
+        updateIdOnesignal(user.email)
+    }, [user]);
+
+    async function updateIdOnesignal(email: string){
+        try {
+            if(!email){
+                return;
+            }
+            const id = await tagNotificationUserCreate(user.email);
+            if(id){
+                await updateUserIdOnesignalApi(id.toString());
+            }
+
+        } catch (error) {
+            throw(error);
+        }
+    }
+
     return (
         <Stack.Navigator
             screenOptions={{
