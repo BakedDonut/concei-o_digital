@@ -1,45 +1,43 @@
 import { baseUrlApi } from '@env';
 import axios from 'axios';
-import * as SecureStore from 'expo-secure-store';
 import { deleteAcessTokenStorage, getAcessTokenStorage } from '../storage/SessionStorage';
 import { deleteUserStorage } from '../storage/UserStorage';
 
 const api = axios.create({
-  baseURL: baseUrlApi,
+    baseURL: baseUrlApi,
 });
 
-
-// Add a request interceptor
+// Interceptor para incluir o token em cada requisição, se disponível
 api.interceptors.request.use(
-  async (config) => {
-    const token = await getAcessTokenStorage();
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
+    async (config) => {
+        const token = await getAcessTokenStorage();
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
 );
 
-// Add a response interceptor
+// Interceptor para lidar com erros de resposta
 api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    const originalRequest = error.config;
+    (response) => response,
+    async (error) => {
+        if (error.response?.status === 401) {
+            console.error('Unauthorized: Please log in again.');
 
-    // Check if the error status is 401
-    if (error.response && error.response.status === 401) {
-      // Handle unauthorized access (e.g., redirect to login)
-      console.error('Unauthorized: Please log in again.');
-      // Optional: Redirect to login or show a message
-      deleteAcessTokenStorage(); // Remove o token
-      deleteUserStorage(); // Remove os dados do usuário
-      
-      delete api.defaults.headers.Authorization; // Remove o cabeçalho de autorização
+            // Limpa o token e os dados do usuário ao detectar um erro 401
+            await deleteAcessTokenStorage();
+            await deleteUserStorage();
+            delete api.defaults.headers.common.Authorization; // Remove o cabeçalho de autorização
+
+            // Aqui, você pode redirecionar o usuário para a tela de login, se necessário
+            // Exemplo: navigation.navigate('Login');
+
+            return Promise.reject(error);
+        }
+        return Promise.reject(error);
     }
-
-    return Promise.reject(error);
-  }
 );
 
 export default api;

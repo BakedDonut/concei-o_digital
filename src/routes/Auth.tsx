@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Admin } from './Admin';
 import { LoginScreen } from '../screens/LoginScreen';
 import { useAuth } from '../providers/AuthContextProvider'; // Ajuste o caminho conforme necessário
+import { useEffect } from 'react';
 
 const Stack = createNativeStackNavigator();
 

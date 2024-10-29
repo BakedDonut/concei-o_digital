@@ -6,7 +6,7 @@ import { deleteUserStorage, getUserStorage } from '../storage/UserStorage';
 
 interface AuthContextType {
     user: User | null;
-    setUser: (user: User | null) => void; // Adiciona setUser ao contexto
+    setUser: (user: User | null) => void;
     logout: () => Promise<void>;
 }
 
@@ -18,6 +18,7 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(true); // Indica se o carregamento está em andamento
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -27,12 +28,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 try {
                     const dataUserString = await getUserStorage();
                     const dataUser = dataUserString ? JSON.parse(dataUserString) : null;
-                    setUser(dataUser); // Atualiza o estado do usuário
+                    setUser(dataUser);
                 } catch (error) {
                     console.error('Failed to fetch user:', error);
-                    // Lógica adicional para lidar com falhas na autenticação
+                    await logout(); // Executa logout em caso de erro
                 }
             }
+            setLoading(false); // Carregamento inicial completo
         };
 
         fetchUser();
@@ -40,15 +42,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const logout = async () => {
         try {
-            await deleteAcessTokenStorage(); // Remove o token
-            await deleteUserStorage(); // Remove os dados do usuário
-            setUser(null); // Limpa o usuário
-            delete api.defaults.headers.Authorization; // Remove o cabeçalho de autorização
+            await deleteAcessTokenStorage();
+            await deleteUserStorage();
+            setUser(null);
+            delete api.defaults.headers.Authorization;
         } catch (error) {
             console.error('Logout failed:', error);
-            // Feedback para o usuário em caso de erro
+            // Feedback adicional para o usuário em caso de erro
         }
     };
+
+    if (loading) {
+        return null; // Ou renderize um componente de carregamento, se preferir
+    }
 
     return (
         <AuthContext.Provider value={{ user, setUser, logout }}>

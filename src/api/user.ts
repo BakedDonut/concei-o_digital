@@ -12,10 +12,12 @@ export async function loginUserApi(email: string, password: string) {
         });
 
         if (!response.ok) {
+            const errorMessage = await response.text(); // Obter a mensagem de erro
+            console.error('Erro de login:', errorMessage);
             throw new Error(`Error: ${response.status}`);
         }
 
-        return await response.json() as {
+        return await response.text() as unknown as {
             user: User;
             access_token: string;
         };
