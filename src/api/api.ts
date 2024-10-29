@@ -8,6 +8,7 @@ const api = axios.create({
   baseURL: baseUrlApi,
 });
 
+
 // Add a request interceptor
 api.interceptors.request.use(
   async (config) => {
@@ -33,6 +34,7 @@ api.interceptors.response.use(
       // Optional: Redirect to login or show a message
       deleteAcessTokenStorage(); // Remove o token
       deleteUserStorage(); // Remove os dados do usuário
+      
       delete api.defaults.headers.Authorization; // Remove o cabeçalho de autorização
     }
 

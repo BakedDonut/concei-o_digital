@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "conceicao_digital",
-    "slug": "conceicao_digital",
+    "name": "conceicao digital",
+    "slug": "conceicao-digital",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,7 +15,8 @@
       "supportsTablet": true,
       "config": {
         "usesNonExemptEncryption": false
-      }
+      },
+      "bundleIdentifier": "com.example.shoppingList"
     },
     "android": {
       "adaptiveIcon": {
@@ -29,7 +30,25 @@
     },
     "plugins": [
       "expo-font",
-      "expo-secure-store"
-    ]
+      "expo-secure-store",
+      [
+        "expo-dev-launcher",
+        {
+          "launchMode": "most-recent"
+        }
+      ],
+      [
+        "onesignal-expo-plugin",
+        {
+          "mode": "development"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e0486535-cdd9-4b3f-a57c-db82d2d409fe"
+      }
+    },
+    "owner": "luiz3123123"
   }
 }

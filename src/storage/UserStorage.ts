@@ -1,5 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 import { User } from '../@types/user';
+import { useAuth } from '../providers/AuthContextProvider';
 
 export async function saveUserStorage(user: User) {
     try {
