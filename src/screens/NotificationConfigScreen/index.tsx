@@ -7,6 +7,7 @@ import CheckIcon from '../../assets/icons/check.svg';
 import { theme } from "../../styles/theme";
 import { fetchEventTypesApi } from "../../api/envents";
 import { EventTypes } from "../../@types/event";
+import { fetchDeviceByIdApi } from "../../api/device";
 
 const data = [
     { id: 1, name: 'missas dominicais' },
@@ -54,6 +55,15 @@ export function NotificationConfigScreen() {
     
         fetchEventTypes();
       }, []);  
+
+      useEffect(() => {
+        const fetchEventTypesFromDevice = async () => {
+          //Aqui vai pegar de device do storage ou session
+        };
+    
+        fetchEventTypesFromDevice();
+      }, []);  
+
 
     return (
         <View style={styles.container}>
