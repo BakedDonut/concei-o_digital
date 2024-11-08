@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 import { useFonts, Roboto_400Regular, Roboto_900Black, Roboto_500Medium } from '@expo-google-fonts/roboto';
 import { LoadingScreen } from './src/screens/LoadingScreen';
 import { OneSignal } from 'react-native-onesignal';
+import { useDeviceConfig } from './src/hooks/useDeviceConfig';
+import { ONESIGNAL_TOKEN } from '@env';
 
 
 export default function App() {
@@ -14,9 +16,11 @@ export default function App() {
     Roboto_500Medium
   });
 
-  OneSignal.initialize("1df309ef-8802-4ece-ba86-1993be6329e4");
+  OneSignal.initialize(ONESIGNAL_TOKEN);
 
   OneSignal.Notifications.requestPermission(true);
+
+  useDeviceConfig();
 
   if (!fontsLoaded) {
     return <LoadingScreen/>;

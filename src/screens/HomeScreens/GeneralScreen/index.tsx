@@ -32,9 +32,7 @@ export function GeneralScreen(){
     const fetchEvents = async () => {
       try {
         const data = await fetchAllEventsApi();
-        setEvents(data);
-        console.log(data);
-        
+        setEvents(data);        
       } catch (err) {
         console.log(err);
       }

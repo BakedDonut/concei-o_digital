@@ -42,6 +42,7 @@ export function LoginScreen() {
                 emailInput,
                 passwordInput
             );
+            
             await saveUserStorage(response.user as User)
             await saveAcessTokenStorage(response.access_token as string)
             setUser(response.user as User)

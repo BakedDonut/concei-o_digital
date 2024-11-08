@@ -1,5 +1,8 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { theme } from "../../styles/theme";
+
+const windowHeight = Dimensions.get('window').height;
+
 
 export const styles = StyleSheet.create({
     title:{
@@ -14,7 +17,7 @@ export const styles = StyleSheet.create({
     },
     content:{
         width: '100%',
-        height: '100%',
+        height: windowHeight,
         paddingHorizontal: 20
     },
     top:{

@@ -31,12 +31,7 @@
     "plugins": [
       "expo-font",
       "expo-secure-store",
-      [
-        "expo-dev-launcher",
-        {
-          "launchMode": "most-recent"
-        }
-      ],
+      
       [
         "onesignal-expo-plugin",
         {

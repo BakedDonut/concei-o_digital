@@ -4,7 +4,7 @@ export type Device = {
     id: string;
     name: string;
     notificationPreferences: {
-        eventsNotificationId: EventTypes[],
+        eventsNotificationId: string[],
         //extraNotificationPreference: string[] possível precisar caso escalone o projeto
     }
 }

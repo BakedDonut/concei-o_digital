@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { Home } from './Home';
 import { NotificationConfigScreen } from '../screens/NotificationConfigScreen';
 import { theme } from '../styles/theme';
-import { AuthProvider } from '../providers/AuthContextProvider'; // Ajuste o caminho conforme necessário
-import { Auth } from './Auth'; // Ajuste o caminho conforme necessário
+import { AuthProvider } from '../providers/AuthContextProvider'; 
+import { Auth } from './Auth';
 
 const Drawer = createDrawerNavigator();
 
 export function Main() {
+
   return (
     <AuthProvider>
       <NavigationContainer>

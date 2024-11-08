@@ -11,7 +11,7 @@ export type Event = {
 };
 
 export type EventTypes = {
-  id: number,
+  id: string,
   name: string;
   image: string;
 }

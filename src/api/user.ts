@@ -17,9 +17,11 @@ export async function loginUserApi(email: string, password: string) {
             throw new Error(`Error: ${response.status}`);
         }
 
-        return await response.text() as unknown as {
-            user: User;
-            access_token: string;
+        const data = await response.json();
+
+        return {
+            user: data.user,
+            access_token: data.access_token
         };
     } catch (error) {
         console.error(error);

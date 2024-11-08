@@ -1,4 +1,4 @@
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { TopHeaderScreens } from "../../components/TopHeaderScreens";
 import { styles } from "./styles";
 import { useEffect, useState } from "react";
@@ -7,26 +7,9 @@ import CheckIcon from '../../assets/icons/check.svg';
 import { theme } from "../../styles/theme";
 import { fetchEventTypesApi } from "../../api/envents";
 import { EventTypes } from "../../@types/event";
-import { fetchDeviceByIdApi } from "../../api/device";
-
-const data = [
-    { id: 1, name: 'missas dominicais' },
-    { id: 2, name: 'missas semanais' },
-    { id: 3, name: 'missas especiais' },
-    { id: 4, name: 'eventos especiais' },
-    { id: 5, name: 'avisos da paróquia' },
-    { id: 6, name: 'avisos da comunidade' },
-    { id: 7, name: 'avisos da pastoral' },
-    { id: 8, name: 'avisos da catequese' },
-    { id: 9, name: 'avisos da liturgia' },
-    { id: 10, name: 'avisos da música' },
-    { id: 11, name: 'avisos da juventude' },
-    { id: 12, name: 'avisos da crisma' },
-    { id: 13, name: 'avisos do batismo' },
-    { id: 14, name: 'avisos do casamento' },
-    { id: 15, name: 'avisos da eucaristia' },
-    { id: 16, name: 'avisos da confirmação' }
-];
+import { fetchDeviceByIdApi, updateNotificationEventsPreferences } from "../../api/device";
+import { getDeviceDataStorage } from "../../storage/DeviceStorage";
+import { Loading } from "../../components/Loading";
 
 export function NotificationConfigScreen() {
 
@@ -34,14 +17,35 @@ export function NotificationConfigScreen() {
 
     const [eventTypes, setEventTypes] = useState<EventTypes[]>([]);
 
-    const handleSelectItem = (id: string) => {
-        setSelectedItems(prevSelectedItems => {
-            const alreadySelected = prevSelectedItems.includes(id);
-            return alreadySelected 
-                ? prevSelectedItems.filter(item => item !== id) 
-                : [...prevSelectedItems, id];
-        });
+    const [deviceId, setDeviceId] = useState<string>();
+
+    const [loadActive, setLoadActive] = useState(false);
+
+    async function handleSelectItem (id: string){
+        try {
+            setLoadActive(true);
+            
+            setSelectedItems(prevSelectedItems => {
+                const alreadySelected = prevSelectedItems.includes(id);
+                return alreadySelected 
+                    ? prevSelectedItems.filter(item => item !== id) 
+                    : [...prevSelectedItems, id];
+            });
+        } catch (error) {
+            console.log(error);
+            
+            throw error;
+        } finally {
+            setLoadActive(false);
+        }
     };
+
+    useEffect(() => {
+        async function update(){
+            await updateNotificationEventsPreferences(deviceId, selectedItems);
+        }
+        update();
+      }, [selectedItems]);  
     
     useEffect(() => {
         const fetchEventTypes = async () => {
@@ -58,7 +62,11 @@ export function NotificationConfigScreen() {
 
       useEffect(() => {
         const fetchEventTypesFromDevice = async () => {
-          //Aqui vai pegar de device do storage ou session
+          const dataDevice = await getDeviceDataStorage();
+            if(dataDevice !==null){                
+                setSelectedItems(dataDevice?.notificationPreferences.eventsNotificationId);
+                setDeviceId(dataDevice.id)
+            }
         };
     
         fetchEventTypesFromDevice();
@@ -74,30 +82,37 @@ export function NotificationConfigScreen() {
             <ScrollView style={styles.content}>
                 <Text style={styles.titleSelectEvent}>Selecione os eventos que deseja ser notificado</Text>
                 <View style={{ width: '100%', height: '100%' }}>
-                <FlashList 
-                    data={eventTypes}
-                    keyExtractor={item => item.id.toString()}
-                    showsVerticalScrollIndicator={false}
-                    extraData={selectedItems}
-                    estimatedItemSize={56} 
-                    renderItem={({ item }) => (
-                        <TouchableOpacity
-                            onPress={() => handleSelectItem(item.id.toString())}
-                            style={styles.option}
-                        >
-                            <View style={[styles.itemCheck, 
-                                selectedItems.includes(item.id.toString()) && { backgroundColor: theme.colors.primary }
-                            ]}>
-                                {selectedItems.includes(item.id.toString()) && (
-                                    <CheckIcon fill={'white'} width={20} height={20} />
-                                )}
-                            </View>
-                            <Text style={styles.optionName}>{item.name}</Text>
-                        </TouchableOpacity>
-                    )}
-                />
+                    {
+                        loadActive ? 
+                        <Loading/>
+                        :
+                        <FlashList 
+                            data={eventTypes}
+                            keyExtractor={item => item.id.toString()}
+                            showsVerticalScrollIndicator={false}
+                            extraData={selectedItems}
+                            estimatedItemSize={56} 
+                            renderItem={({ item }) => (
+                                <TouchableOpacity
+                                    onPress={() => handleSelectItem(item.id.toString())}
+                                    style={styles.option}
+                                >
+                                    <View style={[styles.itemCheck, 
+                                        selectedItems.includes(item.id.toString()) && { backgroundColor: theme.colors.primary }
+                                    ]}>
+                                        {selectedItems.includes(item.id.toString()) && (
+                                            <CheckIcon fill={'white'} width={20} height={20} />
+                                        )}
+                                    </View>
+                                    <Text style={styles.optionName}>{item.name}</Text>
+                                </TouchableOpacity>
+                            )}
+                        />
+                    }
+                
                 </View>
             </ScrollView>
+            <View style={{height:30}}/>
         </View>
     ); 
 }
