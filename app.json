@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "conceicao digital",
+    "name": "Conceição Digital",
     "slug": "conceicao-digital",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#faf8e1"
     },
     "ios": {
       "supportsTablet": true,
@@ -21,7 +21,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#faf8e1"
       },
       "package": "com.ifnmg.conceicao_digital"
     },
