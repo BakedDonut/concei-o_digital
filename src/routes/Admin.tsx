@@ -5,6 +5,7 @@ import { theme } from '../styles/theme';
 import { ButtonOpenMainDrawer } from '../components/ButtonOpenMainDrawer';
 import { TopHeaderScreens } from '../components/TopHeaderScreens';
 import { View } from 'react-native';
+import { ConfigScreen } from '../screens/AdminScreens/ConfigScreen';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -33,8 +34,10 @@ export function Admin() {
           },
         }}
       >
-        <Tab.Screen name="Editar" component={EditEventScreen} />
-        <Tab.Screen name="Criar" component={CreateEventScreen}/>
+        <Tab.Screen name="Adicionar" component={CreateEventScreen}/>
+        <Tab.Screen name="Alterar" component={EditEventScreen} />
+        <Tab.Screen name="Aplicativo" component={ConfigScreen}/>
+        
       </Tab.Navigator>
     </>
   );
