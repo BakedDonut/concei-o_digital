@@ -11,14 +11,16 @@ export async function useDeviceConfig(){
         async function deviceExistsFromStorage(){
           try {
             let dataDevice = await getDeviceDataStorage();
-            //dataDevice = null; //Excluir depois para não ficar criando um tanto de registro no banco de dados
             
             if(dataDevice === null){
-              const pushNotificationIdDevice = registerUserNotification();
+              const pushNotificationIdDevice = await registerUserNotification();
       
-              const deviceReferenceData = DeviceExpo.deviceName+'_'+DeviceExpo.modelName;
-              //const uniqueId = DeviceInfo.getUniqueId();
-              const response = await createDeviceApi(deviceReferenceData, pushNotificationIdDevice.toString());
+              const uniqueId = await DeviceInfo.getUniqueId();
+              const deviceReferenceData = uniqueId+'_'+DeviceExpo.modelName;
+              
+              console.log('uniqueId', DeviceExpo.deviceName);
+              
+              const response = await createDeviceApi(deviceReferenceData, (pushNotificationIdDevice ?? '').toString());
 
               const dataDevice: Device = {
                 id: response.id, 

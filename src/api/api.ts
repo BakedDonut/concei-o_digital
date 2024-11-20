@@ -8,12 +8,13 @@ const api = axios.create({
     baseURL: baseUrlApi,
 });
 
-
 api.interceptors.request.use(
     async (config) => {
-        const token = await getAcessTokenStorage();        
+        const token = await getAcessTokenStorage(); 
+        console.log('token', token);
+               
         if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
+            config.headers.Authorization = `Bearer ${token}`;            
         }
         return config;
     },
@@ -24,12 +25,12 @@ api.interceptors.response.use(
     (response) => response,
     async (error) => {
         if (error.response?.status === 401) {
-            const {logout} = useAuth();
+            //const {logout} = useAuth();
 
-            await deleteAcessTokenStorage();
-            await deleteUserStorage();
-            delete api.defaults.headers.common.Authorization;
-            logout();
+           // await deleteAcessTokenStorage();
+            //await deleteUserStorage();
+            //delete api.defaults.headers.common.Authorization;
+            //logout();
            
             return Promise.reject(error);
         }

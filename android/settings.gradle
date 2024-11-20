@@ -44,7 +44,7 @@ if (getRNMinorVersion() >= 75) {
   }
 }
 
-rootProject.name = 'conceicao digital'
+rootProject.name = 'Conceição Digital'
 
 dependencyResolutionManagement {
   versionCatalogs {
