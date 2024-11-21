@@ -2,7 +2,6 @@ import { Dimensions, StyleSheet } from 'react-native';
 import { theme } from '../../../styles/theme';
 
 const width = Dimensions.get('screen').width;
-console.log(width);
 
 export const styles = StyleSheet.create({
   container: {
@@ -16,7 +15,7 @@ export const styles = StyleSheet.create({
     marginVertical: 10
   },
   label:{
-    color: theme.colors.labal,
+    color: theme.colors.label,
     fontFamily: theme.fonts.medium,
     fontSize: theme.sizes.medium
   },

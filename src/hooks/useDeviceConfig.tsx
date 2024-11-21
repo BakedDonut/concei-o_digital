@@ -5,6 +5,7 @@ import { createDeviceApi } from "../api/device";
 import * as DeviceExpo from 'expo-device';
 import DeviceInfo from 'react-native-device-info';
 import { Device } from "../@types/device";
+import Constants from 'expo-constants';
 
 export async function useDeviceConfig(){    
     useEffect(() => {      
@@ -15,7 +16,13 @@ export async function useDeviceConfig(){
             if(dataDevice === null){
               const pushNotificationIdDevice = await registerUserNotification();
       
-              const uniqueId = await DeviceInfo.getUniqueId();
+              let uniqueId = 'expo';
+
+              if(Constants.appOwnership !== 'expo'){
+                console.log('expo');
+                 //uniqueId = await DeviceInfo.getUniqueId();
+              }
+
               const deviceReferenceData = uniqueId+'_'+DeviceExpo.modelName;
               
               console.log('uniqueId', DeviceExpo.deviceName);

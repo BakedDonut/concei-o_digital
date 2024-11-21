@@ -97,7 +97,6 @@ export function CreateEventScreen() {
             setValue('end_date', formattedDate);
         }
     };
-console.log(selectedStartDate);
 
     return (
         <KeyboardAvoidingView
