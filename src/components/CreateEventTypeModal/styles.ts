@@ -6,9 +6,6 @@ export const styles = StyleSheet.create({
         flex:1,
         paddingHorizontal: 16
     },
-    buttonContainer:{
-
-    },
     inputContainer:{
         justifyContent: 'flex-start',
         marginVertical: 10
@@ -23,9 +20,16 @@ export const styles = StyleSheet.create({
         backgroundColor: theme.colors.background_text_input,
         borderRadius: 5,
     },
-    errorText:{
-        fontFamily: theme.fonts.medium,
-        fontSize: theme.sizes.small,
-        color: 'red'
-    }
+    buttonCreateTypeEvent:{
+        height: 40,
+        backgroundColor: theme.colors.background_text_input,
+        borderRadius: 1,
+        borderColor: theme.colors.primary,
+      },
+      textButtonCreateTypeEvent:{
+        color: theme.colors.primary,
+        fontFamily: theme.fonts.black,
+        fontSize: theme.sizes.large,
+        textAlign: 'center'
+      },
 });

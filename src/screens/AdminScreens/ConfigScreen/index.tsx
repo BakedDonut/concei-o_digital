@@ -7,18 +7,20 @@ import GearIcon from '../../../assets/icons/gear-thin.svg';
 import UserIcon from '../../../assets/icons/user-circle-dashed-thin.svg';
 import ChurchIcon from '../../../assets/icons/church-thin.svg';
 import { theme } from '../../../styles/theme';
-
+import { CreateEventTypeModal } from '../../../components/CreateEventTypeModal';
+import { NotifyDevicesModal } from '../../../components/NotifyDevicesModal';
 
 export function ConfigScreen() {
 
-  const [typeEvent, setTypeEvent] = useState<string>();
+  const [notifyAllVisible, setNotifyAllVisible] = useState(false);
+  const [createEventTypeVisible, setCreateEventTypeVisible] = useState(false);
 
   function handleCreateTypeEvent(){
-
+    setCreateEventTypeVisible(true);
   }
 
   function handleNotifyAll(){
-
+    setNotifyAllVisible(true);
   }
 
   function handleUserSetting(){
@@ -33,6 +35,15 @@ export function ConfigScreen() {
   const sizeIcons = 40;
 
   return (
+    <>
+    <CreateEventTypeModal 
+      modalVisible={createEventTypeVisible}
+      setModalVisible={setCreateEventTypeVisible}
+    />
+    <NotifyDevicesModal 
+      modalVisible={notifyAllVisible}
+      setModalVisible={setNotifyAllVisible}
+    />
     <ScrollView style={styles.container}>
       <View style={{flexDirection: 'row'}}>
         <TouchableOpacity style={styles.optionSelect} onPress={handleCreateTypeEvent}>
@@ -57,20 +68,7 @@ export function ConfigScreen() {
           <Text style={styles.titleItem}>Configurar aplicativo</Text>
         </TouchableOpacity>
       </View>
-
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Subtítulo do evento</Text>
-          <TextInput
-            style={styles.inputText}
-            onChangeText={(text)=>setTypeEvent(text)}
-            value={typeEvent}
-            placeholder='Novo tipo de evento'
-          />
-        </View>
-        <TouchableOpacity onPress={handleUpdateTypeEvent} style={styles.buttonCreateTypeEvent}>
-          <Text style={styles.textButtonCreateTypeEvent}>Criar um tipo de evento</Text>
-        </TouchableOpacity>
-
     </ScrollView>
+    </>
   );
 }

@@ -6,13 +6,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { styles } from './styles';
 import { BackButton } from '../BackButton';
 import { Button } from 'react-native';
+import { sendNotificationForAllApi } from '../../api/notify';
 
-// Definindo o schema de validação
 const eventSchema = z.object({
   title: z.string().min(1, 'Título da notificação é obrigatório'),
   content: z.string().min(1, 'O conteúdo da notificação é obrigatório'),
-  subtitle: z.string().optional(),
-  description: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof eventSchema>;
@@ -51,8 +49,8 @@ export function NotifyDevicesModal({ modalVisible, setModalVisible }: Props) {
     resolver: zodResolver(eventSchema),
   });
 
-  const onSubmit = (data: FormValues) => {
-    console.log('Form Data:', data);
+  const onSubmit = async (data: FormValues) => {
+    const response = await sendNotificationForAllApi(data.title, data.content);
   };
 
   return (
@@ -62,16 +60,16 @@ export function NotifyDevicesModal({ modalVisible, setModalVisible }: Props) {
 
         <InputField
           control={control}
-          name="subtitle"
-          label="Subtítulo do evento"
-          error={errors.subtitle?.message}
+          name="title"
+          label="Título da notificação"
+          error={errors.title?.message}
         />
 
         <InputField
           control={control}
-          name="description"
-          label="Descrição completa"
-          error={errors.description?.message}
+          name="content"
+          label="Conteúdo da notificação"
+          error={errors.content?.message}
           multiline
         />
 

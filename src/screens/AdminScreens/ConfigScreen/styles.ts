@@ -23,18 +23,6 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.colors.background_text_input,
     borderRadius: 5,
   },
-  buttonCreateTypeEvent:{
-    height: 40,
-    backgroundColor: theme.colors.background_text_input,
-    borderRadius: 1,
-    borderColor: theme.colors.primary,
-  },
-  textButtonCreateTypeEvent:{
-    color: theme.colors.primary,
-    fontFamily: theme.fonts.black,
-    fontSize: theme.sizes.large,
-    textAlign: 'center'
-  },
   optionSelect:{
     borderRadius: 1,
     borderColor: theme.colors.primary,

@@ -123,3 +123,16 @@ export async function deleteEventApi(id: string) {
         throw error; 
     }
 }
+
+export async function createTypeEventApi(name:string){
+    try {
+        const response = await api.post('/typeEvent', {
+            name
+        });
+        
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error; 
+    }
+}
