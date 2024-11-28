@@ -1,13 +1,15 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { theme } from '../../../styles/theme';
+
+const windowWidth = Dimensions.get('window').width;
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    paddingHorizontal: 16,
-    width: '100%',
-    flexDirection: 'column'
+    width: windowWidth,
+    flexDirection: 'column',
+    padding: 10, // Espaçamento adicional ao redor do conteúdo
   },
   inputContainer:{
     justifyContent: 'flex-start',
@@ -24,13 +26,24 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
   },
   optionSelect:{
-    borderRadius: 1,
-    borderColor: theme.colors.primary,
-    backgroundColor: '#ffffff'
+    flex: 1,  // Permite que cada quadrado ocupe uma parte igual da linha
+    borderRadius: 10,
+    borderColor: theme.colors.primary_bright,
+    backgroundColor: theme.colors.background_text_input,
+    margin: 5, // Espaço entre os quadrados
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10, // Espaço interno do quadrado
+    minHeight: 120, // Garantir que os quadrados tenham uma altura mínima
+    maxWidth: (windowWidth - 40) / 2, // Cada quadrado ocupará metade da largura da tela, considerando o padding
+    flexDirection: 'column', // Alinha os itens dentro do quadrado verticalmente,
+    borderWidth: 2,
   },
   titleItem:{
     fontFamily: theme.fonts.medium,
     fontSize: theme.sizes.medium,
-    color: '#000'
+    color: theme.colors.primary_bright, // Texto branco para contraste
+    marginTop: 10, // Distância do ícone para o texto
+    textAlign: 'center',
   }
 });

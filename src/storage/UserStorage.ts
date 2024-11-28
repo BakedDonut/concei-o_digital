@@ -12,7 +12,12 @@ export async function saveUserStorage(user: User) {
 
 export async function getUserStorage() {
     try {
-        return await SecureStore.getItemAsync('user');
+        const storedData = await SecureStore.getItemAsync('user');
+        if (!storedData) {
+            return null;
+        }        
+        
+        return JSON.parse(storedData) as User;
     } catch (error) {
         console.error('Error saving user data', error);
     }

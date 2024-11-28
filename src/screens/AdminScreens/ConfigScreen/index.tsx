@@ -9,11 +9,13 @@ import ChurchIcon from '../../../assets/icons/church-thin.svg';
 import { theme } from '../../../styles/theme';
 import { CreateEventTypeModal } from '../../../components/CreateEventTypeModal';
 import { NotifyDevicesModal } from '../../../components/NotifyDevicesModal';
+import { EditUserModal } from '../../../components/EditUserModal';
 
 export function ConfigScreen() {
 
   const [notifyAllVisible, setNotifyAllVisible] = useState(false);
   const [createEventTypeVisible, setCreateEventTypeVisible] = useState(false);
+  const [editUserModalVisible, setEditUserModalVisible] = useState(false)
 
   function handleCreateTypeEvent(){
     setCreateEventTypeVisible(true);
@@ -24,25 +26,29 @@ export function ConfigScreen() {
   }
 
   function handleUserSetting(){
-
+    setEditUserModalVisible(true)
   }
 
   function handleAppSettings(){
 
   }
 
-  const colorIcons = theme.colors.primary_background,
+  const colorIcons = theme.colors.primary_bright;
   const sizeIcons = 40;
 
   return (
     <>
     <CreateEventTypeModal 
       modalVisible={createEventTypeVisible}
-      setModalVisible={setCreateEventTypeVisible}
+      setModalVisible={(va)=>setCreateEventTypeVisible(false)}
     />
     <NotifyDevicesModal 
       modalVisible={notifyAllVisible}
-      setModalVisible={setNotifyAllVisible}
+      setModalVisible={()=>setNotifyAllVisible(false)}
+    />
+    <EditUserModal
+      modalVisible={editUserModalVisible}
+      setModalVisible={()=>setEditUserModalVisible(false)}
     />
     <ScrollView style={styles.container}>
       <View style={{flexDirection: 'row'}}>

@@ -10,7 +10,7 @@ type Props ={
 
 export function BackButton({onPress}:Props) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={()=>onPress(false)}>
         <ArrowLeftIcon fill={theme.colors.primary} width={40} height={40}/>
     </TouchableOpacity>
   );

@@ -1,5 +1,6 @@
 import { baseUrlApi } from "@env";
 import { User } from "../@types/user";
+import api from "./api";
 
 export async function loginUserApi(email: string, password: string) {
     try {
@@ -29,3 +30,17 @@ export async function loginUserApi(email: string, password: string) {
     }
 }
 
+export async function updateUserApi(name:string, email:string, password: string){
+    try {
+        const response = await api.post('/typeEvent', {
+            name,
+            email,
+            password
+        });
+        
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error; 
+    }
+}

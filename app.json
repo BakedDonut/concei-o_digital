@@ -31,13 +31,13 @@
     "plugins": [
       "expo-font",
       "expo-secure-store",
-      
       [
         "onesignal-expo-plugin",
         {
           "mode": "development"
         }
-      ]
+      ],
+      "expo-build-properties"
     ],
     "extra": {
       "eas": {

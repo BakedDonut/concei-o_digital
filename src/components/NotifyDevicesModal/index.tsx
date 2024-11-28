@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Modal, TextInput } from 'react-native';
+import { Text, View, Modal, TextInput, TouchableOpacity } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -28,7 +28,7 @@ const InputField = ({ control, name, label, error, multiline = false }: { contro
       name={name}
       render={({ field: { onChange, onBlur, value } }) => (
         <TextInput
-          style={[styles.inputText, multiline && { height: 200, textAlignVertical: 'top' }]}
+          style={[styles.inputText, multiline && { height: 100, textAlignVertical: 'top' }]}
           onBlur={onBlur}
           onChangeText={onChange}
           value={value}
@@ -54,9 +54,12 @@ export function NotifyDevicesModal({ modalVisible, setModalVisible }: Props) {
   };
 
   return (
-    <Modal animationType="slide" transparent visible={modalVisible}>
+    <Modal animationType="fade" transparent visible={modalVisible}>
       <View style={styles.modalView}>
         <BackButton onPress={() => setModalVisible(false)} />
+
+        <Text style={styles.title}>Enviar notificação</Text>
+        <Text style={styles.subtitle}>Ao clicar em enviar notificação, enviará notificação para todos os dispositivos</Text>
 
         <InputField
           control={control}
@@ -72,10 +75,9 @@ export function NotifyDevicesModal({ modalVisible, setModalVisible }: Props) {
           error={errors.content?.message}
           multiline
         />
-
-        <View style={styles.buttonContainer}>
-          <Button title="Enviar" onPress={handleSubmit(onSubmit)} />
-        </View>
+        <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.buttonNotify}>
+          <Text style={styles.textButtonNotify}>Enviar notificação</Text>
+        </TouchableOpacity>
       </View>
     </Modal>
   );

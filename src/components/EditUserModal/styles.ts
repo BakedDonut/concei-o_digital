@@ -5,7 +5,8 @@ export const styles = StyleSheet.create({
     modalView: {
         flex:1,
         paddingHorizontal: 16,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        padding: 10
     },
     inputContainer:{
         justifyContent: 'flex-start',

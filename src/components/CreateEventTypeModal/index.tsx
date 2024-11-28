@@ -3,6 +3,7 @@ import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 import { Modal } from 'react-native';
 import { createTypeEventApi } from '../../api/envents';
+import { BackButton } from '../BackButton';
 
 type Props = {
     modalVisible: boolean;
@@ -19,12 +20,18 @@ export function CreateEventTypeModal({modalVisible, setModalVisible}:Props) {
 
   return (
     <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
     >
         <View style={styles.modalView}>
+        <BackButton 
+          onPress={()=>setModalVisible(false)}
+        />
         <View style={styles.inputContainer}>
+          <Text style={styles.title}>Inserir novos tipos de eventos</Text>
+          <Text style={styles.subtitle}>Os tipos de eventos criados aqui são aqueles que podem aparecer quando você cria um novo</Text>
+
           <Text style={styles.label}>Nome do tipo do evento</Text>
           <TextInput
             style={styles.inputText}

@@ -2,12 +2,6 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { GeneralScreen } from '../screens/HomeScreens/GeneralScreen';
 import { AboutSreen } from '../screens/HomeScreens/AboutScreen';
 import { theme } from '../styles/theme';
-import ListIcon from '../assets/icons/list.svg';
-import { CreateEventScreen } from '../screens/AdminScreens/CreateEventScreen';
-import { Button, Text, TouchableOpacity, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { ButtonOpenMainDrawer } from '../components/ButtonOpenMainDrawer';
 import { TopHeaderScreens } from '../components/TopHeaderScreens';
 import { Groups } from './Groups';
 
