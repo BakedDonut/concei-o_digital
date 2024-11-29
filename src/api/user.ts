@@ -30,9 +30,10 @@ export async function loginUserApi(email: string, password: string) {
     }
 }
 
-export async function updateUserApi(name:string, email:string, password: string){
+export async function updateUserApi(id: string, name:string, email:string, password: string){
     try {
-        const response = await api.post('/typeEvent', {
+        const response = await api.patch('/user', {
+            id,
             name,
             email,
             password

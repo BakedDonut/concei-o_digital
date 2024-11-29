@@ -48,6 +48,7 @@ export function EditUserModal({ modalVisible, setModalVisible }: Props) {
         email: '',
         is_admin: false,
         password: '',
+        id: ''
     });
 
     const {
@@ -60,7 +61,9 @@ export function EditUserModal({ modalVisible, setModalVisible }: Props) {
       });
     
     const onSubmit = async (data: FormValues) => {
-        const response = await updateUserApi(data.name, data.email, data.password);
+        const response = await updateUserApi(dataUserStorage.id,data.name, data.email, data.password);
+        console.log(response.data);
+        
     };
     
     useEffect(() => {
@@ -109,7 +112,7 @@ export function EditUserModal({ modalVisible, setModalVisible }: Props) {
             error={errors.password?.message}
         />
         <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.buttonNotify}>
-            <Text style={styles.textButtonNotify}>Enviar notificação</Text>
+            <Text style={styles.textButtonNotify}>Salvar dados</Text>
         </TouchableOpacity>
         </View>
       </Modal>

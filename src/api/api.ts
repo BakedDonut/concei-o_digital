@@ -13,8 +13,9 @@ api.interceptors.request.use(
         const token = await getAcessTokenStorage(); 
         console.log('token', token);
                
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;            
+        if (token) {            
+            config.headers.Authorization = `Bearer ${token}`; 
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         }
         return config;
     },
