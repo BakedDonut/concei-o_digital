@@ -24,7 +24,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const fetchUser = async () => {
             const token = await getAcessTokenStorage();
             if (token) {
-                api.defaults.headers.Authorization = `Bearer ${token}`;
                 try {
                     const dataUserString = await getUserStorage();
                     const dataUser = dataUserString ? JSON.parse(dataUserString) : null;

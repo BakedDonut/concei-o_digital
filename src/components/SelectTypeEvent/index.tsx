@@ -47,7 +47,7 @@ export function SelectTypeEvent({onSelectEvent, eventDefaultSelected}: Props) {
     };
 
     fetchTypeEvents();
-  }, []);  
+  }, [selectTypeEventVisible]);  
 
   return (
     <>

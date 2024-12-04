@@ -6,6 +6,10 @@ import { useAuth } from '../providers/AuthContextProvider';
 
 const api = axios.create({
     baseURL: baseUrlApi,
+    headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
 });
 
 api.interceptors.request.use(
@@ -13,30 +17,27 @@ api.interceptors.request.use(
         const token = await getAcessTokenStorage(); 
         console.log('token', token);
                
-        if (token) {            
-            config.headers.Authorization = `Bearer ${token}`; 
-            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        if (token) {
+            // Remove qualquer aspas extras que possam ter sido adicionadas ao redor do token
+            config.headers.Authorization = `Bearer ${token.replace(/"/g, '')}`;
         }
         return config;
     },
     (error) => Promise.reject(error)
 );
 
+
 api.interceptors.response.use(
     (response) => response,
     async (error) => {
         if (error.response?.status === 401) {
-            //const {logout} = useAuth();
-
-           // await deleteAcessTokenStorage();
-            //await deleteUserStorage();
-            //delete api.defaults.headers.common.Authorization;
-            //logout();
-           
+            console.log('Erro 401:', error.response);
+            // Aqui você pode analisar a resposta com mais detalhes
             return Promise.reject(error);
         }
         return Promise.reject(error);
     }
 );
+
 
 export default api;

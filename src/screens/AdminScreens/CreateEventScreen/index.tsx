@@ -9,6 +9,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { theme } from '../../../styles/theme';
 import { createEventApi } from '../../../api/envents';
+import { formatDateToISO } from '../../../utils/formatDate';
 
 const validateTimeRange = (value: string) => {
     const [hours, minutes] = value.split(':').map(Number);
@@ -34,6 +35,7 @@ export function CreateEventScreen() {
         handleSubmit,
         formState: { errors },
         setValue,
+        reset,
         watch,
     } = useForm<FormValues>({
         resolver: zodResolver(eventSchema),
@@ -54,12 +56,36 @@ export function CreateEventScreen() {
 
     async function createEvent(data : any){
         try {
-            await createEventApi(data)
+            if(data.location===undefined){
+                data.location = 'Igreja Matriz';
+            }
+            data.start_date = formatDateToISO(data.start_date);
+            data.end_date = formatDateToISO(data.end_date);
+            
+            await createEventApi(data);
+            resetAllInputs();
         } catch (error) {
             console.log(error);
 
             throw (error);            
         }
+    }
+
+    function resetAllInputs() {
+        reset({
+            title: '',
+            subtitle: '',
+            description: '',
+            location: '',
+            start_date: '00/00/0000',
+            end_date: '00/00/0000',
+            time: '',
+            eventType: ''
+        });
+
+        setSelectedEventType(null);
+        setSelectedStartDate('00/00/0000');
+        setSelectedEndDate('00/00/0000');
     }
 
     const locationValue = watch('location');

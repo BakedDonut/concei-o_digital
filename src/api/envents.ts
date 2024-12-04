@@ -124,10 +124,11 @@ export async function deleteEventApi(id: string) {
     }
 }
 
-export async function createTypeEventApi(name:string){
+export async function createTypeEventApi(name:string, image: string){
     try {
         const response = await api.post('/typeEvent', {
-            name
+            name,
+            image
         });
         
         return response.data;

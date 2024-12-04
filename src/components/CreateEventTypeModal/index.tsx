@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 import { Modal } from 'react-native';
 import { createTypeEventApi } from '../../api/envents';
@@ -13,9 +13,16 @@ type Props = {
 export function CreateEventTypeModal({modalVisible, setModalVisible}:Props) {
 
     const [typeEvent, setTypeEvent] = useState<string>('');
+    const [imageUrl, setImageUrl] = useState<string>('');
+
 
     async function handleCreateTypeEvent(){
-        const response = await createTypeEventApi(typeEvent);
+        if(typeEvent === '' && imageUrl === ''){
+          return;
+        }        
+        await createTypeEventApi(typeEvent, imageUrl); 
+        setTypeEvent(''); setImageUrl('');
+        Alert.alert('','Tipo de evento criado')       
     }
 
   return (
@@ -38,6 +45,13 @@ export function CreateEventTypeModal({modalVisible, setModalVisible}:Props) {
             onChangeText={(text)=>setTypeEvent(text)}
             value={typeEvent}
             placeholder='Novo tipo de evento'
+          />
+          <Text style={styles.label}>Link da imagem do evento</Text>
+          <TextInput
+            style={styles.inputText}
+            onChangeText={(text)=>setImageUrl(text)}
+            value={typeEvent}
+            placeholder='Link público da imagem do evento'
           />
         </View>
         <TouchableOpacity onPress={handleCreateTypeEvent} style={styles.buttonCreateTypeEvent}>
