@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Modal, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, Modal, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -43,6 +43,7 @@ const InputField = ({ control, name, label, error, multiline = false }: { contro
 export function NotifyDevicesModal({ modalVisible, setModalVisible }: Props) {
   const {
     control,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({
@@ -50,11 +51,18 @@ export function NotifyDevicesModal({ modalVisible, setModalVisible }: Props) {
   });
 
   const onSubmit = async (data: FormValues) => {
-    const response = await sendNotificationForAllApi(data.title, data.content);
+    try {
+      const response = await sendNotificationForAllApi(data.title, data.content);
+      Alert.alert('','Notificação Enviada')
+      setValue('content','')
+      setValue('title','')
+    } catch (error) {
+      Alert.alert('','Erro ao enviar a notificação')
+    }
   };
 
   return (
-    <Modal animationType="fade" transparent visible={modalVisible}>
+    <Modal animationType="fade" transparent visible={modalVisible}         onRequestClose={() => setModalVisible(false) }>
       <View style={styles.modalView}>
         <BackButton onPress={() => setModalVisible(false)} />
 

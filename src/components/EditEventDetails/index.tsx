@@ -146,6 +146,7 @@ export default function EditEventDetails({ close, event }: Props) {
 
   async function confirmDelete(){
     await deleteEventApi(event.id);
+    close();
   }
 
   return (

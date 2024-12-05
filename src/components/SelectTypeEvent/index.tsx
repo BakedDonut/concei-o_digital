@@ -59,6 +59,7 @@ export function SelectTypeEvent({onSelectEvent, eventDefaultSelected}: Props) {
       visible={selectTypeEventVisible}
       transparent={true}
       animationType="slide"
+      onRequestClose={() => setSelectTypeEventVisible(false) }
     >
       <View style={styles.modalBackground}>
         <View style={styles.modalContent}>

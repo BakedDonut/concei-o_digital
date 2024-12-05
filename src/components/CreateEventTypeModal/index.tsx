@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TextInput, TouchableOpacity, View, BackHandler } from 'react-native';
 import { styles } from './styles';
 import { Modal } from 'react-native';
 import { createTypeEventApi } from '../../api/envents';
@@ -25,11 +25,14 @@ export function CreateEventTypeModal({modalVisible, setModalVisible}:Props) {
         Alert.alert('','Tipo de evento criado')       
     }
 
+    
+
   return (
     <Modal
         animationType="fade"
         transparent={true}
         visible={modalVisible}
+        onRequestClose={() => setModalVisible(false) }
     >
         <View style={styles.modalView}>
         <BackButton 
@@ -50,7 +53,7 @@ export function CreateEventTypeModal({modalVisible, setModalVisible}:Props) {
           <TextInput
             style={styles.inputText}
             onChangeText={(text)=>setImageUrl(text)}
-            value={typeEvent}
+            value={imageUrl}
             placeholder='Link público da imagem do evento'
           />
         </View>

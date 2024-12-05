@@ -37,6 +37,7 @@ export function FilterEvents({setFilterSelected}:Props) {
           animationType="slide"
           transparent={true}
           visible={modalVisible}
+          onRequestClose={() => setModalVisible(false) }
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>

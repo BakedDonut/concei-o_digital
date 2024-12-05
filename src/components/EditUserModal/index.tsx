@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Modal, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { z } from 'zod';
 import { styles } from './styles';
 import { Controller, useForm } from 'react-hook-form';
@@ -61,10 +61,24 @@ export function EditUserModal({ modalVisible, setModalVisible }: Props) {
       });
     
     const onSubmit = async (data: FormValues) => {
-        const response = await updateUserApi(dataUserStorage.id,data.name, data.email, data.password);
-        console.log(response.data);
-        
+      try {
+        Alert.alert('Tem certeza', `Nome: ${data.name},\n\nEmail ${data.email},\n\nSenha ${data.password}`, [
+          {
+            text: 'Voltar',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {text: 'Tenho certeza', onPress: () =>update(data)},
+        ]);
+      } catch (error) {
+        Alert.alert('Error','Erro ao alterar dados do usuário')
+      }
     };
+
+    async function update(data: FormValues){
+      await updateUserApi(dataUserStorage.id,data.name, data.email, data.password);
+      Alert.alert('','Dados do usuário alterado com sucesso')
+    }
     
     useEffect(() => {
         loadData();
@@ -84,7 +98,7 @@ export function EditUserModal({ modalVisible, setModalVisible }: Props) {
     }
 
   return (
-    <Modal animationType="fade" transparent visible={modalVisible}>
+    <Modal animationType="fade" transparent visible={modalVisible}         onRequestClose={() => setModalVisible(false) }>
         <View style={styles.modalView}>
           <BackButton onPress={() => setModalVisible(false)} />
   

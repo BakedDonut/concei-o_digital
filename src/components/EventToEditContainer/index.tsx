@@ -12,9 +12,10 @@ import { formatTime } from '../../utils/formatTime';
 type Props = {
   event: Event;
   eventSelected: (eventID: string) => void;
+  refreshList:(e: boolean) => void;
 };
 
-export function EventToEditContainer({ event, eventSelected }: Props) {
+export function EventToEditContainer({ event, eventSelected ,refreshList}: Props) {
   const formattedDate = new Date(event.start_date).toLocaleDateString('pt-BR'); // Personalize o formato conforme necessário
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -25,11 +26,12 @@ export function EventToEditContainer({ event, eventSelected }: Props) {
 
   function closeModal() {
     setModalVisible(false);
+    refreshList(true)
   }
 
   return (
     <TouchableOpacity style={{ marginTop: 10 }} onPress={openModal}>
-      <Modal transparent={true} animationType="slide" visible={modalVisible}>
+      <Modal transparent={true} animationType="slide" visible={modalVisible}         onRequestClose={() => setModalVisible(false) }      >
         <EditEventDetails close={closeModal} event={event}/>
       </Modal>
 
