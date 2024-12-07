@@ -6,7 +6,7 @@ import { FlashList } from '@shopify/flash-list';
 import { Text } from 'react-native';
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import { NavigationProps } from '../../../@types/navigation';
-import { fetchEventTypesApi } from '../../../api/envents';
+import { fetchEventTypesApi } from '../../../api/events';
 import { EventTypes } from '../../../@types/event';
 
 

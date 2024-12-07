@@ -7,7 +7,7 @@ import { Event, EventTypes } from '../../@types/event';
 import CaretDownIcon from '../../assets/icons/caret-down-fill.svg'
 import { theme } from '../../styles/theme';
 import XIcon from '../../assets/icons/x.svg'
-import { fetchEventTypesApi } from '../../api/envents';
+import { fetchEventTypesApi } from '../../api/events';
 
 type Props = {
   onSelectEvent: (event: EventTypes) => void;

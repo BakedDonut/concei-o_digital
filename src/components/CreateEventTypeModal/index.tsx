@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Alert, Text, TextInput, TouchableOpacity, View, BackHandler } from 'react-native';
 import { styles } from './styles';
 import { Modal } from 'react-native';
-import { createTypeEventApi } from '../../api/envents';
+import { createTypeEventApi } from '../../api/events';
 import { BackButton } from '../BackButton';
 
 type Props = {

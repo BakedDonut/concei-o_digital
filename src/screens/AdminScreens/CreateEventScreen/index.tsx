@@ -8,7 +8,7 @@ import { SelectTypeEvent } from '../../../components/SelectTypeEvent';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { theme } from '../../../styles/theme';
-import { createEventApi } from '../../../api/envents';
+import { createEventApi } from '../../../api/events';
 import { formatDateToISO } from '../../../utils/formatDate';
 
 const validateTimeRange = (value: string) => {
@@ -63,8 +63,8 @@ export function CreateEventScreen() {
             data.end_date = formatDateToISO(data.end_date);
             console.log(data.start_date);
             
-            //await createEventApi(data);
-            //resetAllInputs();
+            await createEventApi(data);
+            resetAllInputs();
         } catch (error) {
             console.log(error);
 

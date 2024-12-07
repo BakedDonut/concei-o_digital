@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { FlashList } from "@shopify/flash-list";
 import CheckIcon from '../../assets/icons/check.svg';
 import { theme } from "../../styles/theme";
-import { fetchEventTypesApi } from "../../api/envents";
+import { fetchEventTypesApi } from "../../api/events";
 import { EventTypes } from "../../@types/event";
 import { fetchDeviceByIdApi, updateNotificationEventsPreferences } from "../../api/device";
 import { getDeviceDataStorage } from "../../storage/DeviceStorage";

@@ -3,7 +3,7 @@ import { Modal, Text, TouchableOpacity, View } from 'react-native';
 
 import { styles } from './styles';
 import { Event, EventTypes } from '../../@types/event';
-import { deleteEventTypesApi, fetchEventsbyTypeApi, fetchEventTypesApi } from '../../api/envents';
+import { deleteEventTypesApi, fetchEventsbyTypeApi, fetchEventTypesApi } from '../../api/events';
 import { BackButton } from '../BackButton';
 import { FlashList } from '@shopify/flash-list';
 import TrashIcon from '../../assets/icons/trash-fill.svg';
@@ -27,11 +27,15 @@ export function DeleteTypeEventModal({ visible, setModalVisible }: Props) {
   };
 
   async function handleConfirmDelete () {
-    if (item) {
-      await deleteEventTypesApi(item.id);
+    try {
+        if (item) {
+            await deleteEventTypesApi(item.id);
+          }
+          setConfirmDeleteModalVisible(false);
+          setModalVisible(false);
+    } catch (error) {
+        console.log(error);
     }
-    setConfirmDeleteModalVisible(false);
-    setModalVisible(false);
   }
 
   useEffect(() => {

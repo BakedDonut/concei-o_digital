@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { FilterEvents } from "../../../components/FilterEvents";
 import { EventsList } from "../../../components/EventsList";
 import { Event } from "../../../@types/event";
-import { fetchAllEventsApi } from "../../../api/envents";
+import { fetchAllEventsApi } from "../../../api/events";
 
 export function EditEventScreen() {
   const [eventSelected, setEventSelected] = useState<Event | undefined>(undefined);

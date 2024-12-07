@@ -48,8 +48,8 @@ export async function fetchEventTypesApi() {
 
 export async function deleteEventTypesApi(id: string) {
     try {        
-        const response = await api.delete('/eventTypes', {
-            data: { id }
+        const response = await api.post('/typeEvent/delete', {
+            id
         });   
         
         return response.data;

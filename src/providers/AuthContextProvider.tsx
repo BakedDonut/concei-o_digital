@@ -25,8 +25,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             const token = await getAcessTokenStorage();
             if (token) {
                 try {
-                    const dataUserString = await getUserStorage();
-                    const dataUser = dataUserString ? JSON.parse(dataUserString) : null;
+                    const dataUserString = await getUserStorage();                    
+                    const dataUser = typeof dataUserString === 'string' ? JSON.parse(dataUserString) : null;
                     setUser(dataUser);
                 } catch (error) {
                     console.error('Failed to fetch user:', error);

@@ -5,7 +5,7 @@ import { Event } from "../../../@types/event";
 import { FilterEvents } from "../../../components/FilterEvents";
 import { useEffect, useState } from "react";
 import { FilterType, useFilterEventByDate } from "../../../hooks/useFilterEventsByDate";
-import { fetchAllEventsApi } from "../../../api/envents";
+import { fetchAllEventsApi } from "../../../api/events";
 
 
 export function GeneralScreen() {

@@ -10,7 +10,7 @@ import { Event } from '../../../@types/event';
 import { LoadingScreen } from '../../LoadingScreen';
 import BackIcon from '../../../assets/icons/caret-left-bold.svg'
 import { theme } from '../../../styles/theme';
-import { fetchEventsbyTypeApi } from '../../../api/envents';
+import { fetchEventsbyTypeApi } from '../../../api/events';
 
 type ParamsProps = {
     typeGroupSearch: string;
