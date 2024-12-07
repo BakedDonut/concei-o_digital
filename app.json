@@ -16,14 +16,18 @@
       "config": {
         "usesNonExemptEncryption": false
       },
-      "bundleIdentifier": "com.example.shoppingList"
+      "bundleIdentifier": "com.example.shoppingList",
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#faf8e1"
       },
-      "package": "com.ifnmg.conceicao_digital"
+      "package": "com.ifnmg.conceicao_digital",
+      "runtimeVersion": "1.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -44,6 +48,9 @@
         "projectId": "e0486535-cdd9-4b3f-a57c-db82d2d409fe"
       }
     },
-    "owner": "luiz3123123"
+    "owner": "luiz3123123",
+    "updates": {
+      "url": "https://u.expo.dev/e0486535-cdd9-4b3f-a57c-db82d2d409fe"
+    }
   }
 }

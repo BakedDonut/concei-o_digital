@@ -121,16 +121,19 @@ export default function EditEventDetails({ close, event }: Props) {
 
   const onChangeDate = (event: any, selectedDate: Date | undefined) => {
     const currentDate = selectedDate || new Date();
-    const type = openSelectDate.typeDateUpdate;        
+    const type = openSelectDate.typeDateUpdate;
     setOpenSelectDate(prevState => ({
-      ...prevState,
-      visible: false
+        ...prevState,
+        visible: false
     }));
-    const formattedDate = formatDate(currentDate);
-    if(type === 'start'){
-      setSelectedStartDate(formattedDate);
-      setValue('start_date', formattedDate);
-    }else{
+
+    const adjustedDate = new Date(currentDate.getTime() + currentDate.getTimezoneOffset() * 60000);
+    const formattedDate = formatDate(adjustedDate);
+
+    if (type === 'start') {
+        setSelectedStartDate(formattedDate);
+        setValue('start_date', formattedDate);
+    } else {
         setSelectedEndDate(formattedDate);
         setValue('end_date', formattedDate);
     }

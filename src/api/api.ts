@@ -33,6 +33,8 @@ api.interceptors.response.use(
         if (error.response?.status === 401) {
             console.log('Erro 401:', error.response);
             // Aqui você pode analisar a resposta com mais detalhes
+            await deleteUserStorage();
+            await deleteAcessTokenStorage();
             return Promise.reject(error);
         }
         return Promise.reject(error);

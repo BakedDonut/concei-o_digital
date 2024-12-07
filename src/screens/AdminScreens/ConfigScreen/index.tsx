@@ -10,12 +10,15 @@ import { theme } from '../../../styles/theme';
 import { CreateEventTypeModal } from '../../../components/CreateEventTypeModal';
 import { NotifyDevicesModal } from '../../../components/NotifyDevicesModal';
 import { EditUserModal } from '../../../components/EditUserModal';
+import TrashIcon from '../../../assets/icons/trash-simple-thin.svg';
+import { DeleteTypeEventModal } from '../../../components/DeleteTypeEventModal';
 
 export function ConfigScreen() {
 
   const [notifyAllVisible, setNotifyAllVisible] = useState(false);
   const [createEventTypeVisible, setCreateEventTypeVisible] = useState(false);
-  const [editUserModalVisible, setEditUserModalVisible] = useState(false)
+  const [editUserModalVisible, setEditUserModalVisible] = useState(false);
+  const [deleteTypeEventVisible, setDeleteTypeEventVisible] = useState(false);
 
   function handleCreateTypeEvent(){
     setCreateEventTypeVisible(true);
@@ -31,6 +34,10 @@ export function ConfigScreen() {
 
   function handleAppSettings(){
 
+  }
+
+  function handleDeleteTypeEvent(){
+    setDeleteTypeEventVisible(true);
   }
 
   const colorIcons = theme.colors.primary_bright;
@@ -49,6 +56,10 @@ export function ConfigScreen() {
     <EditUserModal
       modalVisible={editUserModalVisible}
       setModalVisible={()=>setEditUserModalVisible(false)}
+    />
+    <DeleteTypeEventModal
+      visible={deleteTypeEventVisible}
+      setModalVisible={setDeleteTypeEventVisible}
     />
     <ScrollView style={styles.container}>
       <View style={{flexDirection: 'row'}}>
@@ -72,6 +83,12 @@ export function ConfigScreen() {
         <TouchableOpacity style={styles.optionSelect} onPress={handleAppSettings}>
           <GearIcon fill={colorIcons} width={sizeIcons} height={sizeIcons}/>
           <Text style={styles.titleItem}>Configurar aplicativo</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity style={styles.optionSelect} onPress={handleDeleteTypeEvent}>
+          <TrashIcon fill={colorIcons} width={sizeIcons} height={sizeIcons}/>
+          <Text style={styles.titleItem}>Deletar tipo de evento</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>

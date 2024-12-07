@@ -46,6 +46,20 @@ export async function fetchEventTypesApi() {
     }
 }
 
+export async function deleteEventTypesApi(id: string) {
+    try {        
+        const response = await api.delete('/eventTypes', {
+            data: { id }
+        });   
+        
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+
 export async function fetchEventsbyTypeApi(typeId: string) {
     try {
         const response = await fetch(`${baseUrlApi}/eventsByType`, {

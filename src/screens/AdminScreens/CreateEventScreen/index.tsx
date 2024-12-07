@@ -61,9 +61,10 @@ export function CreateEventScreen() {
             }
             data.start_date = formatDateToISO(data.start_date);
             data.end_date = formatDateToISO(data.end_date);
+            console.log(data.start_date);
             
-            await createEventApi(data);
-            resetAllInputs();
+            //await createEventApi(data);
+            //resetAllInputs();
         } catch (error) {
             console.log(error);
 
@@ -109,16 +110,19 @@ export function CreateEventScreen() {
 
     const onChangeDate = (event: any, selectedDate: Date | undefined) => {
         const currentDate = selectedDate || new Date();
-        const type = openSelectDate.typeDateUpdate;        
+        const type = openSelectDate.typeDateUpdate;
         setOpenSelectDate(prevState => ({
             ...prevState,
             visible: false
         }));
-        const formattedDate = formatDate(currentDate);
-        if(type === 'start'){
+    
+        const adjustedDate = new Date(currentDate.getTime() + currentDate.getTimezoneOffset() * 60000);
+        const formattedDate = formatDate(adjustedDate);
+    
+        if (type === 'start') {
             setSelectedStartDate(formattedDate);
             setValue('start_date', formattedDate);
-        }else{
+        } else {
             setSelectedEndDate(formattedDate);
             setValue('end_date', formattedDate);
         }
@@ -128,11 +132,11 @@ export function CreateEventScreen() {
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={styles.container}
+            keyboardVerticalOffset={100} 
         >
             <ScrollView
                 contentContainerStyle={{ flexGrow: 1 }}
                 keyboardShouldPersistTaps="handled"
-                keyboardDismissMode="on-drag"
             >
                 <View style={styles.inputContainer}>
                     <Text style={styles.label}>Título do evento</Text>
