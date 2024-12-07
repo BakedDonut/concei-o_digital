@@ -37,7 +37,6 @@ api.interceptors.response.use(
             await deleteAcessTokenStorage();
             return Promise.reject(error);
         }
-        return Promise.reject(error);
     }
 );
 
