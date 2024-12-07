@@ -6,6 +6,7 @@ import { theme } from '../../styles/theme';
 import { Event } from '../../@types/event';
 import EventsDetails from '../EventsDetails';
 import { formatTime } from '../../utils/formatTime';
+import { formatDate } from '../../utils/formatDate';
 
 type Props = {
   event: Event;
@@ -13,8 +14,7 @@ type Props = {
 };
 
 export function EventContainer({ event, eventSelected }: Props) {
-  const formattedDate = new Date(event.start_date).toLocaleDateString('pt-BR'); // Personalize o formato conforme necessário
-
+  const formattedDate = formatDate(event.start_date);
   const [modalVisible, setModalVisible] = useState(false);
 
   function openModal() {

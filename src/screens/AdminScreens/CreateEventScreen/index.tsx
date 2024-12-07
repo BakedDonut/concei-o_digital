@@ -9,7 +9,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { theme } from '../../../styles/theme';
 import { createEventApi } from '../../../api/events';
-import { formatDateToISO } from '../../../utils/formatDate';
+import { formatDate, formatDateToISO } from '../../../utils/formatDate';
 
 const validateTimeRange = (value: string) => {
     const [hours, minutes] = value.split(':').map(Number);
@@ -61,9 +61,9 @@ export function CreateEventScreen() {
             }
             data.start_date = formatDateToISO(data.start_date);
             data.end_date = formatDateToISO(data.end_date);
-            Alert.alert(data.end_date);
-            //await createEventApi(data);
-            //resetAllInputs();
+            
+            await createEventApi(data);
+            resetAllInputs();
         } catch (error) {
             console.log(error);
 
@@ -100,13 +100,6 @@ export function CreateEventScreen() {
         return formattedText;
     };
 
-    const formatDate = (date: Date) => {
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses começam em 0
-        const year = date.getFullYear();
-        return `${day}/${month}/${year}`;
-    };
-
     const onChangeDate = (event: any, selectedDate: Date | undefined) => {
         const currentDate = selectedDate || new Date();
         const type = openSelectDate.typeDateUpdate;
@@ -115,9 +108,8 @@ export function CreateEventScreen() {
             visible: false
         }));
     
-        const adjustedDate = new Date(currentDate.getTime() + currentDate.getTimezoneOffset() * 60000);
-        const formattedDate = formatDate(adjustedDate);
-        
+        const formattedDate = formatDate(currentDate);
+    
         if (type === 'start') {
             setSelectedStartDate(formattedDate);
             setValue('start_date', formattedDate);

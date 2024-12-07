@@ -9,6 +9,7 @@ import CalendarIcon from '../../assets/icons/calendar-dots-fill.svg'
 import LocationIcon from '../../assets/icons/map-pin.svg'
 import EditEventDetails from '../EditEventDetails';
 import { formatTime } from '../../utils/formatTime';
+import { formatDate } from '../../utils/formatDate';
 type Props = {
   event: Event;
   eventSelected: (eventID: string) => void;
@@ -16,8 +17,8 @@ type Props = {
 };
 
 export function EventToEditContainer({ event, eventSelected ,refreshList}: Props) {
-  const formattedDate = new Date(event.start_date).toLocaleDateString('pt-BR'); // Personalize o formato conforme necessário
-
+  const formattedDate = formatDate(event.start_date);
+  
   const [modalVisible, setModalVisible] = useState(false);
 
   function openModal() {
