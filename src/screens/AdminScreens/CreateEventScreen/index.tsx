@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, Text, TextInput, View, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
+import { ScrollView, Text, TextInput, View, KeyboardAvoidingView, Platform, TouchableOpacity, Alert } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -61,10 +61,9 @@ export function CreateEventScreen() {
             }
             data.start_date = formatDateToISO(data.start_date);
             data.end_date = formatDateToISO(data.end_date);
-            console.log(data.start_date);
-            
-            await createEventApi(data);
-            resetAllInputs();
+            Alert.alert(data.end_date);
+            //await createEventApi(data);
+            //resetAllInputs();
         } catch (error) {
             console.log(error);
 
@@ -118,7 +117,7 @@ export function CreateEventScreen() {
     
         const adjustedDate = new Date(currentDate.getTime() + currentDate.getTimezoneOffset() * 60000);
         const formattedDate = formatDate(adjustedDate);
-    
+        
         if (type === 'start') {
             setSelectedStartDate(formattedDate);
             setValue('start_date', formattedDate);
