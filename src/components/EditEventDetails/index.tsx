@@ -26,6 +26,7 @@ import TrashIcon from '../../assets/icons/trash-fill.svg';
 import { formatDate, formatDateToISO } from '../../utils/formatDate';
 import { formatTime } from '../../utils/formatTime';
 import { deleteEventApi, editEventApi } from '../../api/events';
+import { useRefreshList } from '../../hooks/useRefreshList';
 
 interface Props {
   close: () => void;
@@ -116,8 +117,6 @@ export default function EditEventDetails({ close, event }: Props) {
       
     }
   }
-
-  
 
   const onChangeDate = (event: any, selectedDate: Date | undefined) => {
     const currentDate = selectedDate || new Date();

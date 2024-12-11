@@ -1,24 +1,23 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-interface RefreshContextType {
+export interface RefreshContextType {
     refresh: boolean;
     setRefresh: (e: boolean) => void;
 }
 
-const AuthContext = createContext<RefreshContextType>();
+export const RefreshListContext = createContext<RefreshContextType | undefined>(undefined);
 
 interface AuthProviderProps {
     children: ReactNode;
 }
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const [refresh, setRefresh] = useState<AuthProviderProps>();
+export const RefreshListProvider: React.FC<AuthProviderProps> = ({ children }) => {
+    const [refresh, setRefresh] = useState<boolean>(false); // Corrected state type to boolean
 
     return (
-        <AuthContext.Provider value={{ refresh, setRefresh }}>
+        <RefreshListContext.Provider value={{ refresh, setRefresh }}>
             {children}
-        </AuthContext.Provider>
+        </RefreshListContext.Provider>
     );
 };
-
 

@@ -12,6 +12,7 @@ import { NotifyDevicesModal } from '../../../components/NotifyDevicesModal';
 import { EditUserModal } from '../../../components/EditUserModal';
 import TrashIcon from '../../../assets/icons/trash-simple-thin.svg';
 import { DeleteTypeEventModal } from '../../../components/DeleteTypeEventModal';
+import { ConfigAppModal } from '../../../components/ConfigAppModal';
 
 export function ConfigScreen() {
 
@@ -19,6 +20,7 @@ export function ConfigScreen() {
   const [createEventTypeVisible, setCreateEventTypeVisible] = useState(false);
   const [editUserModalVisible, setEditUserModalVisible] = useState(false);
   const [deleteTypeEventVisible, setDeleteTypeEventVisible] = useState(false);
+  const [configAppVisible,seConfigAppVisible] = useState(false);
 
   function handleCreateTypeEvent(){
     setCreateEventTypeVisible(true);
@@ -60,6 +62,10 @@ export function ConfigScreen() {
     <DeleteTypeEventModal
       visible={deleteTypeEventVisible}
       setModalVisible={setDeleteTypeEventVisible}
+    />
+    <ConfigAppModal
+      visible={configAppVisible}
+      setModalVisible={seConfigAppVisible}
     />
     <ScrollView style={styles.container}>
       <View style={{flexDirection: 'row'}}>

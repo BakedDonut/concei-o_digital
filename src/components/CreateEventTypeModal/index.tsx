@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, Text, TextInput, TouchableOpacity, View, BackHandler } from 'react-native';
 import { styles } from './styles';
 import { Modal } from 'react-native';
 import { createTypeEventApi } from '../../api/events';
 import { BackButton } from '../BackButton';
+import { useRefreshList } from '../../hooks/useRefreshList';
 
 type Props = {
     modalVisible: boolean;
@@ -14,7 +15,7 @@ export function CreateEventTypeModal({modalVisible, setModalVisible}:Props) {
 
     const [typeEvent, setTypeEvent] = useState<string>('');
     const [imageUrl, setImageUrl] = useState<string>('');
-
+    const {setRefresh} = useRefreshList();
 
     async function handleCreateTypeEvent(){
         if(typeEvent === '' && imageUrl === ''){
@@ -22,10 +23,13 @@ export function CreateEventTypeModal({modalVisible, setModalVisible}:Props) {
         }        
         await createTypeEventApi(typeEvent, imageUrl); 
         setTypeEvent(''); setImageUrl('');
+        setRefresh(true);
         Alert.alert('','Tipo de evento criado')       
     }
 
-    
+    useEffect(() => {
+      
+    }, []);
 
   return (
     <Modal

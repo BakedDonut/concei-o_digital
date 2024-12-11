@@ -6,6 +6,7 @@ import { FilterEvents } from "../../../components/FilterEvents";
 import { EventsList } from "../../../components/EventsList";
 import { Event } from "../../../@types/event";
 import { fetchAllEventsApi } from "../../../api/events";
+import { useRefreshList } from "../../../hooks/useRefreshList";
 
 export function EditEventScreen() {
   const [eventSelected, setEventSelected] = useState<Event | undefined>(undefined);
@@ -47,6 +48,15 @@ export function EditEventScreen() {
   const onRefresh = () => {
     fetchEvents(); // Trigger the fetchEvents function on refresh
   };
+
+  const {refresh, setRefresh} = useRefreshList();  
+
+  useEffect(() => {
+    if(refresh){
+      fetchEvents();
+      setRefresh(false);
+    }
+  }, [refresh]);
 
   return (
     <View style={styles.container}>

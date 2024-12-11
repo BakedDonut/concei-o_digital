@@ -10,6 +10,7 @@ import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { theme } from '../../../styles/theme';
 import { createEventApi } from '../../../api/events';
 import { formatDate, formatDateToISO } from '../../../utils/formatDate';
+import { useRefreshList } from '../../../hooks/useRefreshList';
 
 const validateTimeRange = (value: string) => {
     const [hours, minutes] = value.split(':').map(Number);
@@ -54,6 +55,9 @@ export function CreateEventScreen() {
         createEvent(data);
     };
 
+    const {refresh, setRefresh} = useRefreshList();  
+
+
     async function createEvent(data : any){
         try {
             if(data.location===undefined){
@@ -64,6 +68,7 @@ export function CreateEventScreen() {
             
             await createEventApi(data);
             resetAllInputs();
+            setRefresh(true);
         } catch (error) {
             console.log(error);
 
