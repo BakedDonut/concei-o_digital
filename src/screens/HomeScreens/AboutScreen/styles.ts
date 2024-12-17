@@ -49,4 +49,10 @@ export const styles = StyleSheet.create({
         shadowRadius: 4, 
         elevation: 5, 
       },
+      description:{
+        color: theme.colors.gray_400,
+        marginBottom: 20,
+        fontFamily: theme.fonts.regular,
+        fontSize: theme.sizes.small
+      }
 })

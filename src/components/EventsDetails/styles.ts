@@ -13,7 +13,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomColor: theme.colors.primary,
     width: '100%',
-    paddingVertical: 10
+    paddingVertical: 10,
+    justifyContent: "space-between"
   },
   textBtn: {
     color: theme.colors.primary,
@@ -69,6 +70,11 @@ export const styles = StyleSheet.create({
   descriptionContent:{
     marginTop: 14,
     paddingBottom: 70,
+  },
+  info:{
+    color: theme.colors.gray_600,
+    fontFamily: theme.fonts.medium,
+    fontSize: theme.sizes.large
   }
   
 });

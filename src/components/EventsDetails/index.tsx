@@ -29,12 +29,15 @@ export default function EventsDetails({ close, event }: Props) {
       showsVerticalScrollIndicator={false}
     >
         <TouchableOpacity style={styles.header} onPress={close}>
-          <AntDesign
-            name="left"
-            size={22}
-            color="#A59067"
-          />
-          <Text style={styles.textBtn}>Voltar</Text>
+          <>
+            <AntDesign
+              name="left"
+              size={22}
+              color="#A59067"
+            />
+            <Text style={styles.textBtn}>Voltar</Text>
+          </>
+          <Text style={styles.info}>Descrição completa</Text>
         </TouchableOpacity>
         <View style={styles.content}>
           <CrossIcon width={26} height={32} fill={theme.colors.primary}/>

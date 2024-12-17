@@ -19,6 +19,7 @@ export function AboutSreen(){
             </View>
             <View style={styles.buttons}>
                 <Text style={styles.title}>Contatos:</Text>
+                <Text style={styles.description}>Redes da paróquia Imaculada da Conceição</Text>
                 <TouchableOpacity onPress={()=>Linking.openURL('https://wa.me/3335223278')} style={[styles.button, {backgroundColor: '#80A460'}]}>
                     <WhatsappIcon fill={colorIcon} width={sizeIcon} height={sizeIcon}/>
                     <Text style={styles.textButton}>Secretaria (33) 35223278</Text>
